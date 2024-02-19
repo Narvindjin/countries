@@ -1,18 +1,21 @@
+const TRANS_TIME = "0.2s";
 
 class theme {
-    fontNunito: "\"Nunito Sans\", \"Arial\", sans-serif";
-    transTime: "0.2s";
-    transDefault: "0.3s ease";
-    colorWhite: "hsl(0, 0%, 100%)";
+    fontNunito;
+    transDefault;
+    colorWhite;
     colorText;
     colorBackground;
     colorElement;
     colorInput;
-    constructor(textColor, backgroundColor, elementColor, inputColor) {
+    constructor(textColor: string, backgroundColor: string, elementColor: string, inputColor: string) {
         this.colorText = textColor;
         this.colorBackground = backgroundColor;
         this.colorElement = elementColor;
         this.colorInput = inputColor;
+        this.fontNunito = "\"Nunito Sans\", \"Arial\", sans-serif";
+        this.transDefault = TRANS_TIME +  " ease";
+        this.colorWhite = "hsl(0, 0%, 100%)";
     }
 }
 
@@ -30,4 +33,4 @@ const darkTheme = new theme(
     "hsl(209, 23%, 22%)",
 )
 
-export {lightTheme, darkTheme}
+export {lightTheme, darkTheme, TRANS_TIME}

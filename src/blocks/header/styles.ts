@@ -6,10 +6,11 @@ const StyledHeader = styled.header`
     display: flex;
     width: 100%;
     background-color: ${(props) => props.theme.colorElement};
-    padding-top: 15px;
-    padding-bottom: 15px;
-    
-    @media (${media}) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+
+    @media (${media.mobile}) {
         position: fixed;
         top: 0;
         left: 0;
@@ -22,7 +23,10 @@ const HeaderContainer = styled.div`
     gap: 30px;
 `
 
-const headerLink = styled.a`
+const HeaderLink = styled.a`
     display: block;
-    
+    font-size: 2.4rem;
+    ${fontBold};
 `
+
+export {StyledHeader, HeaderContainer, HeaderLink}

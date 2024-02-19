@@ -1,4 +1,5 @@
 import {css} from 'styled-components'
+import { TRANS_TIME } from './theme'
 
 const fontNormal = css`
     font-weight: 600
@@ -25,4 +26,19 @@ const blockMargin = css`
     margin-bottom: 100px;
 `
 
-export {fontNormal, fontLight, textNormal, textNormalDetail, fontBold, blockMargin}
+const hoverFadeOut = css`
+    transition: ${TRANS_TIME};
+    opacity: 1;
+
+    @media (hover: hover) {
+        &:hover {
+            opacity: 0.7
+        }
+    };
+
+    &:focus-visible {
+        opacity: 0.7;
+    }
+` 
+
+export {fontNormal, fontLight, textNormal, textNormalDetail, fontBold, blockMargin, hoverFadeOut}
