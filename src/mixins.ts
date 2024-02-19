@@ -1,25 +1,23 @@
 import {css} from 'styled-components'
 
+const fontNormal = css`
+    font-weight: 600
+`
+
+const fontBold = css`
+    font-weight: 800;
+`
+
+const fontLight = css`
+    font-weight: 300;
+`
+
 const textNormal = css`
-    font-size: 1.8rem;
-    line-height: 1.5;
-`
-
-const textBold = css`
-    font-size: 1.8rem;
-    line-height: 1.5;
-    font-weight: 700;
-`
-
-const textSmall = css`
     font-size: 1.4rem;
-    line-height: 1.5;
 `
 
-const textSmallBold = css`
-    font-size: 1.4rem;
-    line-height: 1.5;
-    font-weight: 700;
+const textNormalDetail = css`
+    font-size: 1.6rem;
 `
 
 const blockMargin = css`
@@ -27,4 +25,4 @@ const blockMargin = css`
     margin-bottom: 100px;
 `
 
-export {textNormal, textSmall, textSmallBold, textBold, blockMargin}
+export {fontNormal, fontLight, textNormal, textNormalDetail, fontBold, blockMargin}

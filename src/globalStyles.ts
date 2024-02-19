@@ -4,6 +4,41 @@ import { normalize } from 'styled-normalize'
 const GlobalStyle = createGlobalStyle`
   ${normalize}
   
+  @font-face {
+  font-display: swap;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 300;
+  src:  url('./fonts/nunito-sans-300.woff2') format('woff2'),
+        url('./fonts/nunito-sans-300.woff') format('woff'),
+}
+  @font-face {
+    font-display: swap;
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/nunito-sans-400.woff2') format('woff2'),
+        url('./fonts/nunito-sans-400.woff') format('woff'),
+  }
+  
+  @font-face {
+    font-display: swap;
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('./fonts/nunito-sans-600.woff2') format('woff2'),
+        url('./fonts/nunito-sans-600.woff') format('woff'),
+  }
+  
+  @font-face {
+    font-display: swap;
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: 800;
+    src: url('./fonts/nunito-sans-800.woff2') format('woff2'),
+        url('./fonts/nunito-sans-800.woff') format('woff'),
+  }
+  
  .visually-hidden {
   position: absolute;
   width: 1px;
@@ -36,8 +71,8 @@ html {
   font-style: normal;
   font-weight: 400;
   font-size: 62.5%;
-  font-family: ${(props) => props.theme.fontInter};
-  color: ${(props) => props.theme.colorBlack};
+  font-family: ${(props) => props.theme.fontNunito};
+  color: ${(props) => props.theme.colorText};
   scroll-behavior: smooth;
 
   -webkit-font-smoothing: antialiased;
@@ -51,18 +86,18 @@ body {
   line-height: 1.25;
   font-family: ${(props) => props.theme.fontInter};
   font-size: 1.6rem;
-  background-color: ${(props) => props.theme.colorWhite};
+  background-color: ${(props) => props.theme.colorBackground};
   position: relative;
 }
 
 button {
   cursor: pointer;
-  color: ${(props) => props.theme.colorBlack};
+  color: ${(props) => props.theme.colorText};
   user-select: none;
 }
 
 a {
-  color: ${(props) => props.theme.colorBlack};
+  color: ${(props) => props.theme.colorText};
   text-decoration: none;
 }
 
@@ -99,9 +134,9 @@ textarea {
 }
 
 input:-webkit-autofill {
-  box-shadow: inset 0 0 0 1000px ${(props) => props.theme.colorWhite};
+  box-shadow: inset 0 0 0 1000px ${(props) => props.theme.colorInput};
 
-  -webkit-text-fill-color: ${(props) => props.theme.colorBlack};
+  -webkit-text-fill-color: ${(props) => props.theme.colorText};
 }
 
 select {
@@ -114,7 +149,7 @@ input {
     display: none;
   }
 
-  color: ${(props) => props.theme.colorBlack};
+  color: ${(props) => props.theme.colorText};
 }
 
 input[type="search"]::-webkit-search-decoration,
