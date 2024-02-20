@@ -4,6 +4,9 @@ import media from "../../breakpoints";
 export const StyledContainer = styled.div`
     padding-left: 90px;
     padding-right: 90px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1440px;
     height: 100%;
     
     @media (${media.mobile}) {
