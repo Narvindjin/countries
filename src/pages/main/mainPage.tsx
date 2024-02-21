@@ -1,10 +1,9 @@
 import React from 'react';
 import CountriesSection from "../../blocks/countriesSection/countriesSection";
 
-const MainPage = () => {
+const MainPage = ({children}:React.PropsWithChildren) => {
     return (
-        <CountriesSection>
-        </CountriesSection>
+        <CountriesSection/>
     )
 }
 

@@ -11,7 +11,6 @@ const CountriesSection = () => {
             <SectionContainer>
                 <StyledForm>
                     <SearchInput></SearchInput>
-                    <SelectInput></SelectInput>
                 </StyledForm>
                 <CountriesList></CountriesList>
             </SectionContainer>

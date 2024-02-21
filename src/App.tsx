@@ -19,7 +19,7 @@ function App() {
   return (
       <ThemeProvider theme={selectedTheme}>
           <GlobalStyle/>
-          <Wrapper selectedTheme={selectedTheme} changeHandler={changeThemeHandler}/>
+          <Wrapper selectedTheme={selectedTheme} changeThemeHandler={changeThemeHandler}/>
       </ThemeProvider>
   );
 }

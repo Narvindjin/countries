@@ -6,9 +6,7 @@ const CountriesList = () => {
     return (
         <StyledList>
             <li>
-                <CountryCard>
-
-                </CountryCard>
+                <CountryCard/>
             </li>
         </StyledList>
     )
