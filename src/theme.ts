@@ -8,7 +8,8 @@ class theme {
     colorBackground;
     colorElement;
     colorInput;
-    constructor(textColor: string, backgroundColor: string, elementColor: string, inputColor: string) {
+    theme;
+    constructor(textColor: string, backgroundColor: string, elementColor: string, inputColor: string, theme: 'dark'|'light') {
         this.colorText = textColor;
         this.colorBackground = backgroundColor;
         this.colorElement = elementColor;
@@ -16,6 +17,7 @@ class theme {
         this.fontNunito = "\"Nunito Sans\", \"Arial\", sans-serif";
         this.transDefault = TRANS_TIME +  " ease";
         this.colorWhite = "hsl(0, 0%, 100%)";
+        this.theme = theme;
     }
 }
 
@@ -24,6 +26,7 @@ const lightTheme = new theme(
     "hsl(0, 0%, 98%)",
     "hsl(0, 0%, 100%)",
     "hsl(0, 0%, 52%)",
+    'light',
 )
 
 const darkTheme = new theme(
@@ -31,6 +34,7 @@ const darkTheme = new theme(
     "hsl(207, 26%, 17%)",
     "hsl(209, 23%, 22%)",
     "hsl(209, 23%, 22%)",
+    'dark',
 )
 
-export {lightTheme, darkTheme, TRANS_TIME}
+export {lightTheme, darkTheme, TRANS_TIME, theme}

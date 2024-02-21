@@ -27,7 +27,7 @@ const blockMargin = css`
 `
 
 const hoverFadeOut = css`
-    transition: ${TRANS_TIME};
+    transition: opacity ${TRANS_TIME} ease;
     opacity: 1;
 
     @media (hover: hover) {
@@ -39,6 +39,22 @@ const hoverFadeOut = css`
     &:focus-visible {
         opacity: 0.7;
     }
-` 
+`
 
-export {fontNormal, fontLight, textNormal, textNormalDetail, fontBold, blockMargin, hoverFadeOut}
+const visuallyHidden = css`
+    position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+    
+      white-space: nowrap;
+    
+      border: 0;
+    
+      clip: rect(0 0 0 0);
+      clip-path: inset(100%);
+`
+
+export {fontNormal, fontLight, textNormal, textNormalDetail, fontBold, blockMargin, hoverFadeOut, visuallyHidden}
