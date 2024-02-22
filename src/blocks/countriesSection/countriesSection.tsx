@@ -1,18 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import StyledContainer from "../../components/container/container";
 import CountriesList from "../../components/countriesList/countriesList";
 import {StyledForm, SectionContainer} from "./styles";
 import SearchInput from "../../components/searchInput/searchInput";
 import SelectInput from "../../components/selectInput/selectInput";
+import {mapObjectInterface} from "../../interfacesAPI/interfacesAPI";
 
-const CountriesSection = () => {
+interface sectionInterface {
+    countriesMapObject: mapObjectInterface
+    firstArray: string[]
+}
+
+const CountriesSection = ({countriesMapObject, firstArray, children}:React.PropsWithChildren<sectionInterface>) => {
+    const [countriesArray, changeCountriesArray] = useState(firstArray);
+
     return (
         <StyledContainer>
             <SectionContainer>
                 <StyledForm>
                     <SearchInput></SearchInput>
                 </StyledForm>
-                <CountriesList></CountriesList>
+                <CountriesList countriesToShow={countriesArray} countriesMapObject = {countriesMapObject}></CountriesList>
             </SectionContainer>
         </StyledContainer>
     )

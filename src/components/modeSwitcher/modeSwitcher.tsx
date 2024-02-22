@@ -9,7 +9,7 @@ interface props {
 
 const ModeSwitcher = ({changeHandler, selectedTheme}:React.PropsWithChildren<props>) => {
     return (
-        <SwitcherButton onClick={(() => changeHandler)}>
+        <SwitcherButton onClick={(() => changeHandler())}>
             <span>{selectedTheme.theme==="dark"?"Dark Mode":"Light Mode"}</span>
         </SwitcherButton>
     )

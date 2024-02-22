@@ -21,6 +21,7 @@ const HeaderContainer = styled.div`
     display: flex;
     flex-direction: row;
     gap: 30px;
+    justify-content: space-between;
 `
 
 const HeaderLink = styled.a`

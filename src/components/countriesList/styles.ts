@@ -6,6 +6,7 @@ const StyledList = styled.ul`
     grid-auto-flow: row;
     gap: 30px;
     list-style-type: none;
+    padding-left: 0;
 `
 
 export {StyledList}

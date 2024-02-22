@@ -15,6 +15,7 @@ function App() {
         } else {
             changeTheme(lightTheme);
         }
+        console.log(selectedTheme);
     }
   return (
       <ThemeProvider theme={selectedTheme}>
