@@ -4,9 +4,11 @@ const StyledList = styled.ul`
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-auto-flow: row;
-    gap: 30px;
+    gap: 65px;
     list-style-type: none;
     padding-left: 0;
+    margin-top: 0;
+    margin-bottom: ${(props) => props.theme.desktopMargin};
 `
 
 export {StyledList}

@@ -1,12 +1,25 @@
-import React from 'react';
-import {InvisibleLabel, StyledInput} from "./styles";
+import React, { ChangeEvent, useState } from 'react';
+import {InvisibleLabel, StyledInput, InputContainer} from "./styles";
 
-const SearchInput = () => {
+interface Props {
+    placeholder: string
+}
+
+const SearchInput = ({placeholder}: Props) => {
+    const [filled, setFilled] = useState(false)
+    const onChangeHandler = (evt:ChangeEvent<HTMLInputElement>) => {
+        if (evt.currentTarget.value) {
+            setFilled(true)
+        } else {
+            setFilled(false)
+        }
+    }
+
     return (
-        <div>
-            <InvisibleLabel></InvisibleLabel>
-            <StyledInput/>
-        </div>
+        <InputContainer $filled={filled}>
+            <InvisibleLabel>{placeholder}</InvisibleLabel>
+            <StyledInput onChange={onChangeHandler} placeholder={placeholder} $filled={filled}/>
+        </InputContainer>
     )
 }
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import media from "../../breakpoints";
-import {fontBold} from "../../mixins";
+import {fontBold, shadowStandard} from "../../mixins";
 
 const StyledHeader = styled.header`
     display: flex;
@@ -9,6 +9,8 @@ const StyledHeader = styled.header`
     padding-top: 20px;
     padding-bottom: 20px;
     align-items: center;
+    z-index: 10;
+    ${shadowStandard}
 
     @media (${media.mobile}) {
         position: fixed;
@@ -20,7 +22,7 @@ const StyledHeader = styled.header`
 const HeaderContainer = styled.div`
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: ${(props) => props.theme.desktopMargin};
     justify-content: space-between;
 `
 

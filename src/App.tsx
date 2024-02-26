@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Wrapper from "./blocks/wrapper/wrapper";
-import {lightTheme, darkTheme} from "./theme";
+import { lightTheme, darkTheme } from "./theme";
 import GlobalStyle from "./globalStyles";
-import {ThemeProvider} from "styled-components";
+import { ThemeProvider } from "styled-components";
 import Header from "./blocks/header/header";
 import MainTag from "./components/mainTag/mainTag";
 import MainPage from "./pages/main/mainPage";
@@ -15,14 +15,13 @@ function App() {
         } else {
             changeTheme(lightTheme);
         }
-        console.log(selectedTheme);
     }
-  return (
-      <ThemeProvider theme={selectedTheme}>
-          <GlobalStyle/>
-          <Wrapper selectedTheme={selectedTheme} changeThemeHandler={changeThemeHandler}/>
-      </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={selectedTheme}>
+            <GlobalStyle />
+                <Wrapper changeThemeHandler={changeThemeHandler} />
+        </ThemeProvider>
+    );
 }
 
 export default App;

@@ -8,12 +8,12 @@ interface card {
 
 const CountryCard = ({country}:card) => {
     return (
-        <StyledCard>
+        <StyledCard href="#">
             <ImageContainer>
-                <img src={country.flags.png} alt={country.flags.alt} width={100} height={100}/>
+                <img src={country.flags.png} alt={country.flags.alt?country.flags.alt:'Flag of ' + country.name.official} width={300} height={210}/>
             </ImageContainer>
             <TextContainer>
-                <CountryTitle>{country.name.official}</CountryTitle>
+                <CountryTitle>{country.name.common}</CountryTitle>
                 <DetailsContainer>
                     <DetailsTerm>Population</DetailsTerm>
                     <DetailsDescription>{country.population}</DetailsDescription>

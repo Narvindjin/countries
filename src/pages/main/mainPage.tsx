@@ -1,15 +1,17 @@
 import React, {useEffect} from 'react';
 import CountriesSection from "../../blocks/countriesSection/countriesSection";
 import {mapObjectInterface} from "../../interfacesAPI/interfacesAPI";
+import { regionInterface } from '../../blocks/wrapper/wrapper';
 
 interface mainPageInterface {
     countriesMapObject: mapObjectInterface;
-    firstArray: string[]
+    firstArray: string[],
+    optionsArray: regionInterface[];
 }
 
-const MainPage = ({countriesMapObject, firstArray, children}:React.PropsWithChildren<mainPageInterface>) => {
+const MainPage = ({countriesMapObject, optionsArray, firstArray, children}:React.PropsWithChildren<mainPageInterface>) => {
     return (
-        <CountriesSection firstArray={firstArray} countriesMapObject={countriesMapObject} />
+        <CountriesSection firstArray={firstArray} optionsArray = {optionsArray} countriesMapObject={countriesMapObject} />
     )
 }
 

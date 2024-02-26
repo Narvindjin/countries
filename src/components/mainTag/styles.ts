@@ -3,7 +3,7 @@ import media from "../../breakpoints";
 
 const StyledMain = styled.main`
     @media (${media.mobile}) {
-        margin-top: 1px;
+        margin-top: 70px;
     }
 `
 

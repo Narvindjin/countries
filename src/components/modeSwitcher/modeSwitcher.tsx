@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { SwitcherButton } from './styles';
-import {theme} from "../../theme";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
+import { ThemeContext } from 'styled-components';
 
 interface props {
     changeHandler: () => void;
-    selectedTheme: theme;
 }
 
-const ModeSwitcher = ({changeHandler, selectedTheme}:React.PropsWithChildren<props>) => {
+const ModeSwitcher = ({changeHandler}:React.PropsWithChildren<props>) => {
+    const context = useContext(ThemeContext)
     return (
         <SwitcherButton onClick={(() => changeHandler())}>
-            <span>{selectedTheme.theme==="dark"?"Dark Mode":"Light Mode"}</span>
+            <span>{context && context.theme==="dark"?
+            <FontAwesomeIcon icon={faSun}/>:<FontAwesomeIcon icon={faMoon}/>}</span>
+            <span>{context && context.theme==="dark"?"Light Mode":"Dark Mode"}</span>
         </SwitcherButton>
     )
 }

@@ -1,9 +1,12 @@
 import styled from "styled-components";
-import {fontBold, fontLight, textNormal} from "../../mixins";
+import {fontBold, fontLight, textNormal, shadowStandard, fontNormal} from "../../mixins";
 
-const StyledCard = styled.div`
+const StyledCard = styled.a`
     display: flex;
     flex-direction: column;
+    background-color: ${((props) => props.theme.colorElement)};
+    height: 100%;
+    ${shadowStandard}
 `
 
 const ImageContainer = styled.div`
@@ -11,34 +14,42 @@ const ImageContainer = styled.div`
     height: auto;
     
     & img {
+        aspect-ratio: 320/210;
         width: 100%;
         height: auto;
-        object-fit: contain;
+        object-fit: fill;
     }
 `
 
 const TextContainer = styled.div`
-    padding: 20px 15px 30px 15px;
+    padding: 20px 30px 40px 30px;
     display: flex;
     flex-direction: column;
+    gap: 8px;
+    height: 100%;
 `
 
 const CountryTitle = styled.h2 `
     margin-top: 0;
-    margin-bottom: 20px;
+    margin-bottom: 6px;
     ${fontBold};
     font-size: 2.2rem;
 `
 
 const DetailsContainer = styled.dl`
     display: flex;
-    flex-direction: column;
-    gap: 5px;
+    flex-direction: row;
     ${textNormal};
+    margin: 0;
+    gap: 5px;
+
+    &:first-of-type {
+        margin-top: auto;
+    }
 `
 
 const DetailsTerm = styled.dt`
-    ${fontBold};
+    ${fontNormal};
     
     &:after {
         content: ': ';
@@ -47,6 +58,7 @@ const DetailsTerm = styled.dt`
 
 const DetailsDescription = styled.dd`
     ${fontLight};
+    margin-left: 0;
 `
 
 export {StyledCard, CountryTitle, DetailsDescription, DetailsContainer, DetailsTerm, TextContainer, ImageContainer}

@@ -3,7 +3,6 @@ import {StyledWrapper} from "./styles";
 import Header from "../header/header";
 import MainTag from "../../components/mainTag/mainTag";
 import MainPage from "../../pages/main/mainPage";
-import {theme} from "../../theme";
 import {jsonFetchGet} from "../../components/jsonFetch/jsonFetch";
 import {receivedCountry, countryMap, mapObjectInterface} from "../../interfacesAPI/interfacesAPI";
 
@@ -11,10 +10,19 @@ const FIRST_FETCH_URL = 'https://restcountries.com/v3.1/all?fields=name,capital,
 
 interface props {
     changeThemeHandler: () => void;
-    selectedTheme: theme;
 }
 
-const Wrapper = ({changeThemeHandler, selectedTheme}: React.PropsWithChildren<props>) => {
+interface regionInterface {
+    value: string|null;
+    label: string;
+}
+
+const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
+    const firstOption: regionInterface = {
+        value: null,
+        label: 'No Filter'
+    }
+    const [optionsArray, setOptionsArray]:[regionInterface[], Dispatch<SetStateAction<regionInterface[]>>] = useState([firstOption]);
     const [isLoading, switchLoadingStatus] = useState(true);
     const [isOkay, switchOkay] = useState(true);
     const COUNTRIES_PER_PAGE = 20;
@@ -44,13 +52,35 @@ const Wrapper = ({changeThemeHandler, selectedTheme}: React.PropsWithChildren<pr
 
     useEffect(() => {
         const loadCountries = async () => {
+            const newOptionsSet: Set<string> = new Set();
             const responseObject: receivedCountry[] | null = await jsonFetchGet(FIRST_FETCH_URL);
             if (responseObject === null) {
                 switchOkay(false);
             } else {
+                responseObject.sort((a,b) => {
+                    if (a.name.common > b.name.common) {
+                        return 1
+                    } else {
+                        return -1
+                    }
+                })
                 responseObject.forEach((element: receivedCountry) => {
-                    countriesMap.set(element.cca3, element)
+                    countriesMap.set(element.cca3, element);
+                    const region = element.region.toLowerCase();
+                    if (!newOptionsSet.has(region)) {
+                        newOptionsSet.add(region);
+                    }
                 });
+                const newOptionsArray:regionInterface[] = [];
+                newOptionsArray.push(firstOption);
+                for (const option of newOptionsSet.values()) {
+                    const regionObject:regionInterface = {
+                        value: option,
+                        label: option,
+                    }
+                    newOptionsArray.push(regionObject);
+                }
+                setOptionsArray(newOptionsArray);
                 updateMapObject({countries: countriesMap})
                 const newFirstArray = Array.from(countriesMapObject.countries.keys()).slice(0, COUNTRIES_PER_PAGE)
                 setFirstArray(newFirstArray)
@@ -77,9 +107,9 @@ const Wrapper = ({changeThemeHandler, selectedTheme}: React.PropsWithChildren<pr
             ) : (
                 isOkay ?
                     (<StyledWrapper>
-                        <Header changeThemeHandler={changeThemeHandler} selectedTheme={selectedTheme}/>
+                        <Header changeThemeHandler={changeThemeHandler}/>
                         <MainTag>
-                            <MainPage firstArray={firstArray} countriesMapObject={countriesMapObject}></MainPage>
+                            <MainPage firstArray={firstArray} optionsArray = {optionsArray} countriesMapObject={countriesMapObject}></MainPage>
                         </MainTag>
                     </StyledWrapper>) :
                     "there's been a problem with API :("
@@ -89,3 +119,5 @@ const Wrapper = ({changeThemeHandler, selectedTheme}: React.PropsWithChildren<pr
 }
 
 export default Wrapper
+
+export type {regionInterface}

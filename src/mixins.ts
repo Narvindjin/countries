@@ -1,6 +1,10 @@
 import {css} from 'styled-components'
 import { TRANS_TIME } from './theme'
 
+const shadowStandard = css`
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.08);
+`
+
 const fontNormal = css`
     font-weight: 600
 `
@@ -57,4 +61,4 @@ const visuallyHidden = css`
       clip-path: inset(100%);
 `
 
-export {fontNormal, fontLight, textNormal, textNormalDetail, fontBold, blockMargin, hoverFadeOut, visuallyHidden}
+export {fontNormal, fontLight, textNormal, textNormalDetail, fontBold, blockMargin, hoverFadeOut, visuallyHidden, shadowStandard}
