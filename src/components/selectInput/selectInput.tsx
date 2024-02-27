@@ -3,6 +3,7 @@ import Select from 'react-select'
 import { handleSelectStyles } from './styles';
 import { regionInterface } from '../../blocks/wrapper/wrapper';
 import { useTheme } from 'styled-components';
+import {InvisibleLabel} from "../searchInput/styles";
 
 interface props {
     optionsArray: regionInterface[];
@@ -11,7 +12,10 @@ interface props {
 const SelectInput = ({optionsArray}: props) => {
     const currentTheme = useTheme()
     return (
-        <Select options={optionsArray} placeholder="Filter by Region" styles={handleSelectStyles(currentTheme)}></Select>
+        <div>
+            <InvisibleLabel htmlFor={'region-filter'}>Filter by Region</InvisibleLabel>
+            <Select name={'region-filter'} id={'region-filter'} options={optionsArray} placeholder="Filter by Region" styles={handleSelectStyles(currentTheme)}></Select>
+        </div>
     )
 }
 

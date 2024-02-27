@@ -6,6 +6,7 @@ import { ThemeProvider } from "styled-components";
 import Header from "./blocks/header/header";
 import MainTag from "./components/mainTag/mainTag";
 import MainPage from "./pages/main/mainPage";
+import {CountryContextContainer} from "./contexts/contexts";
 
 function App() {
     const [selectedTheme, changeTheme] = useState(lightTheme)
@@ -19,7 +20,9 @@ function App() {
     return (
         <ThemeProvider theme={selectedTheme}>
             <GlobalStyle />
-                <Wrapper changeThemeHandler={changeThemeHandler} />
+                <CountryContextContainer>
+                    <Wrapper changeThemeHandler={changeThemeHandler} />
+                </CountryContextContainer>
         </ThemeProvider>
     );
 }

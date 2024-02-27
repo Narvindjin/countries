@@ -11,4 +11,12 @@ const StyledList = styled.ul`
     margin-bottom: ${(props) => props.theme.desktopMargin};
 `
 
-export {StyledList}
+const Divider = styled.li`
+    position: absolute;
+    z-index: 0;
+    bottom: 100px;
+    height: 1px;
+    width: 100%;
+`
+
+export {StyledList, Divider}

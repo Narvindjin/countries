@@ -1,10 +1,11 @@
-import React, {useState, useEffect, Dispatch, SetStateAction} from "react";
+import React, {useState, useEffect, Dispatch, SetStateAction, createContext, useContext} from "react";
 import {StyledWrapper} from "./styles";
 import Header from "../header/header";
 import MainTag from "../../components/mainTag/mainTag";
 import MainPage from "../../pages/main/mainPage";
 import {jsonFetchGet} from "../../components/jsonFetch/jsonFetch";
 import {receivedCountry, countryMap, mapObjectInterface} from "../../interfacesAPI/interfacesAPI";
+import {CountryContext} from "../../contexts/contexts";
 
 const FIRST_FETCH_URL = 'https://restcountries.com/v3.1/all?fields=name,capital,region,nativeName,currencies,population,subregion,tld,languages,borders,flags,cca3'
 
@@ -22,12 +23,11 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
         value: null,
         label: 'No Filter'
     }
+    const actualCountryObject = useContext(CountryContext);
     const [optionsArray, setOptionsArray]:[regionInterface[], Dispatch<SetStateAction<regionInterface[]>>] = useState([firstOption]);
     const [isLoading, switchLoadingStatus] = useState(true);
     const [isOkay, switchOkay] = useState(true);
-    const COUNTRIES_PER_PAGE = 20;
     const countriesMap: countryMap = new Map();
-    const [firstArray, setFirstArray]:[string[], Dispatch<SetStateAction<string[]>>] = useState(['init'])
     const [countriesMapObject, updateMapObject]:[mapObjectInterface, Dispatch<SetStateAction<mapObjectInterface>>] = useState({countries: countriesMap})
 
     const loadingHandler = () => {
@@ -82,8 +82,12 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
                 }
                 setOptionsArray(newOptionsArray);
                 updateMapObject({countries: countriesMap})
-                const newFirstArray = Array.from(countriesMapObject.countries.keys()).slice(0, COUNTRIES_PER_PAGE)
-                setFirstArray(newFirstArray)
+                const newFirstArray = Array.from(countriesMapObject.countries.keys());
+                if (!actualCountryObject.setter) {
+                    console.log('error with country object');
+                    return
+                }
+                actualCountryObject.setter(newFirstArray)
                 const promises:Promise<string>[] = [];
                 newFirstArray.forEach((countryKey) => {
                     const country = countriesMap.get(countryKey);
@@ -106,12 +110,13 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
                 'loading placeholder'
             ) : (
                 isOkay ?
-                    (<StyledWrapper>
-                        <Header changeThemeHandler={changeThemeHandler}/>
-                        <MainTag>
-                            <MainPage firstArray={firstArray} optionsArray = {optionsArray} countriesMapObject={countriesMapObject}></MainPage>
-                        </MainTag>
-                    </StyledWrapper>) :
+                    (
+                        <StyledWrapper>
+                            <Header changeThemeHandler={changeThemeHandler}/>
+                            <MainTag>
+                                <MainPage optionsArray={optionsArray} countriesMapObject={countriesMapObject}></MainPage>
+                            </MainTag>
+                        </StyledWrapper>) :
                     "there's been a problem with API :("
             )}
         </>
@@ -119,5 +124,4 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
 }
 
 export default Wrapper
-
 export type {regionInterface}

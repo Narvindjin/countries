@@ -6,14 +6,8 @@ const SectionContainer = styled.section`
     flex-direction: column;
     gap: ${(props) => props.theme.desktopMargin};
     padding-top: ${(props) => props.theme.desktopMargin};
+    position: relative;
 `
 
-const StyledForm = styled.form`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: ${(props) => props.theme.desktopMargin};
-`
-
-export {SectionContainer, StyledForm}
+export {SectionContainer}
 

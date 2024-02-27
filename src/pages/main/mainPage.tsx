@@ -5,13 +5,12 @@ import { regionInterface } from '../../blocks/wrapper/wrapper';
 
 interface mainPageInterface {
     countriesMapObject: mapObjectInterface;
-    firstArray: string[],
     optionsArray: regionInterface[];
 }
 
-const MainPage = ({countriesMapObject, optionsArray, firstArray, children}:React.PropsWithChildren<mainPageInterface>) => {
+const MainPage = ({countriesMapObject, optionsArray, children}:React.PropsWithChildren<mainPageInterface>) => {
     return (
-        <CountriesSection firstArray={firstArray} optionsArray = {optionsArray} countriesMapObject={countriesMapObject} />
+        <CountriesSection optionsArray = {optionsArray} countriesMapObject={countriesMapObject} />
     )
 }
 

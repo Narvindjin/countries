@@ -17,8 +17,8 @@ const SearchInput = ({placeholder}: Props) => {
 
     return (
         <InputContainer $filled={filled}>
-            <InvisibleLabel>{placeholder}</InvisibleLabel>
-            <StyledInput onChange={onChangeHandler} placeholder={placeholder} $filled={filled}/>
+            <InvisibleLabel htmlFor={'country-name'}>{placeholder}</InvisibleLabel>
+            <StyledInput name={'country-name'} id={'country-name'} onChange={onChangeHandler} placeholder={placeholder} $filled={filled}/>
         </InputContainer>
     )
 }
