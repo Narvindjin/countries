@@ -1,29 +1,25 @@
-import React, {MutableRefObject, useEffect, useRef} from 'react';
+import React, {MutableRefObject, useContext} from 'react';
 import {StyledList, Divider} from "./styles";
 import CountryCard from "../countryCard/countryCard";
-import {mapObjectInterface} from "../../interfacesAPI/interfacesAPI";
+import { CountryContext } from '../../contexts/contexts';
+import { receivedCountry } from '../../interfacesAPI/interfacesAPI';
 
 interface listInterFace {
-    countriesToShow: string[];
-    countriesMapObject: mapObjectInterface;
+    countriesToShow: receivedCountry[];
     loaderElement: MutableRefObject<HTMLLIElement | null>
 }
 
-const CountriesList = ({loaderElement, countriesToShow, countriesMapObject}: React.PropsWithChildren<listInterFace>) => {
+const CountriesList = ({loaderElement, countriesToShow}: React.PropsWithChildren<listInterFace>) => {
+    const countriesObject = useContext(CountryContext)
     return (
         <>
             <StyledList>
                 {countriesToShow.map((country) => {
-                    const countryObject = countriesMapObject.countries.get(country)
-                    if (countryObject) {
                         return (
-                            <li key={country}>
-                                <CountryCard country={countryObject}/>
+                            <li key={country.cca3}>
+                                <CountryCard country={country}/>
                             </li>
                         )
-                    } else {
-                        return null
-                    }
                 })
                 }
                 <Divider ref={loaderElement}/>
