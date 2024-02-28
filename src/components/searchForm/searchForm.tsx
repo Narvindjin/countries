@@ -24,8 +24,21 @@ const SearchForm = ({optionsArray}:props) => {
         }
     }
 
-    const searchForCountry = (iterator) => {
-
+    const searchForCountry = (iterator:IterableIterator<receivedCountry> | receivedCountry[], value:string) => {
+        const newCountryArray:receivedCountry[] = [];
+        const valueStandardized = value.toLowerCase();
+        const checkForMatches = (countryObject:receivedCountry) => {
+            if (countryObject.name.common.toLowerCase().includes(valueStandardized) || countryObject.name.official.toLowerCase().includes(valueStandardized)) {
+                return true
+            }
+            return false
+        }
+        for (const countryObject of iterator) {
+            if (checkForMatches(countryObject)) {
+                newCountryArray.push(countryObject)
+            }
+        }
+        return newCountryArray;
     }
 
     const handleFormSubmit = (evt:FormEvent) => {
@@ -36,7 +49,22 @@ const SearchForm = ({optionsArray}:props) => {
         const form = formRef.current as HTMLFormElement;
         const searchData = new FormData(form);
         const countryMapValues = countryObject.countriesMap.countries.values();
-        const newKeyArray:string[] = [];
+        let newArrayToShow:receivedCountry[] = [];
+        const regionValue = searchData.get('region-filter') as string | null;
+        const searchValue = searchData.get('country-name') as string | null;
+        if (regionValue) {
+            filterRegions(countryMapValues, regionValue, newArrayToShow)
+            if (searchValue) {
+                newArrayToShow = searchForCountry(newArrayToShow, searchValue);
+            }
+        } else {
+            if (searchValue) {
+                newArrayToShow = searchForCountry(countryMapValues, searchValue);
+            }
+        }
+        if (countryObject.setter) {
+            countryObject.setter(newArrayToShow);
+        }
     }
 
     return (
