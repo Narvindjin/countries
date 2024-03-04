@@ -6,13 +6,11 @@ import {regionInterface} from "../../blocks/wrapper/wrapper";
 import {CountryContext} from "../../contexts/contexts";
 import { receivedCountry } from "../../interfacesAPI/interfacesAPI";
 
-interface props {
-    optionsArray: regionInterface[];
-}
 
-const SearchForm = ({optionsArray}:props) => {
+const SearchForm = () => {
     const countryObject = useContext(CountryContext);
     const formRef:MutableRefObject<HTMLFormElement | null> = useRef(null)
+    const optionsArray = countryObject.optionsArray;
 
     const filterRegions = (iterator:IterableIterator<receivedCountry>, value:string, arrayToFill: receivedCountry[]) => {
         if (value) {

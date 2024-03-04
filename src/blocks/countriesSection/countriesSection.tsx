@@ -7,11 +7,7 @@ import { regionInterface } from '../wrapper/wrapper';
 import { CountryContext } from "../../contexts/contexts";
 import SearchForm from "../../components/searchForm/searchForm";
 
-interface sectionInterface {
-    optionsArray: regionInterface[],
-}
-
-const CountriesSection = ({ optionsArray }: React.PropsWithChildren<sectionInterface>) => {
+const CountriesSection = () => {
     const arrayContextObject = useContext(CountryContext);
     const contextCountryArray = arrayContextObject.array as receivedCountry[]
     const [countriesArray, changeCountriesArray] = useState(contextCountryArray.slice(0, arrayContextObject.amountPerPage));
@@ -22,9 +18,7 @@ const CountriesSection = ({ optionsArray }: React.PropsWithChildren<sectionInter
             if (numberOfItems.current < contextCountryArray.length) {
                 const newNumber = numberOfItems.current + arrayContextObject.amountPerPage;
                 numberOfItems.current = newNumber;
-                console.log(contextCountryArray)
                 const newCountriesArray = contextCountryArray.slice(0, newNumber)
-                console.log(numberOfItems.current);
                 changeCountriesArray(newCountriesArray)
             }
     }, [contextCountryArray, arrayContextObject.amountPerPage])
@@ -64,7 +58,7 @@ const CountriesSection = ({ optionsArray }: React.PropsWithChildren<sectionInter
     return (
         <StyledContainer>
             <SectionContainer>
-                <SearchForm optionsArray={optionsArray}></SearchForm>
+                <SearchForm></SearchForm>
                 <CountriesList loaderElement={loaderElement} countriesToShow={countriesArray}></CountriesList>
             </SectionContainer>
         </StyledContainer>

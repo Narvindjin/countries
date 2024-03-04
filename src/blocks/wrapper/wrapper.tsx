@@ -6,6 +6,8 @@ import MainPage from "../../pages/main/mainPage";
 import {jsonFetchGet} from "../../components/jsonFetch/jsonFetch";
 import {receivedCountry, countryMap} from "../../interfacesAPI/interfacesAPI";
 import {CountryContext} from "../../contexts/contexts";
+import {Outlet, useLoaderData} from "react-router-dom";
+import {LoaderInterface} from "../../index";
 
 const FIRST_FETCH_URL = 'https://restcountries.com/v3.1/all?fields=name,capital,region,nativeName,currencies,population,subregion,tld,languages,borders,flags,cca3'
 
@@ -19,14 +21,10 @@ interface regionInterface {
 }
 
 const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
-    const firstOption: regionInterface = {
-        value: '',
-        label: 'No Filter'
-    }
     const actualCountryObject = useContext(CountryContext);
-    const [optionsArray, setOptionsArray]:[regionInterface[], Dispatch<SetStateAction<regionInterface[]>>] = useState([firstOption]);
     const [isLoading, switchLoadingStatus] = useState(true);
     const [isOkay, switchOkay] = useState(true);
+    const loaderData:LoaderInterface = useLoaderData() as LoaderInterface;
 
     const loadingHandler = () => {
         if (isLoading) {
@@ -50,8 +48,8 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
 
     const loadCountries = async () => {
         const newOptionsSet: Set<string> = new Set();
-        const responseObject: receivedCountry[] | null = await jsonFetchGet(FIRST_FETCH_URL);
         const tempCountriesMap: countryMap = new Map();
+        const responseObject = loaderData.apiData;
         if (responseObject === null) {
             switchOkay(false);
         } else {
@@ -69,8 +67,7 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
                     newOptionsSet.add(region);
                 }
             });
-            const newOptionsArray:regionInterface[] = [];
-            newOptionsArray.push(firstOption);
+            const newOptionsArray:regionInterface[] = actualCountryObject.optionsArray;
             for (const option of newOptionsSet.values()) {
                 const regionObject:regionInterface = {
                     value: option,
@@ -78,30 +75,32 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
                 }
                 newOptionsArray.push(regionObject);
             }
-            setOptionsArray(newOptionsArray);
-            if (!actualCountryObject.countriesMapSetter || !actualCountryObject.setter) {
+            if (!actualCountryObject.countriesMapSetter || !actualCountryObject.setter || !actualCountryObject.optionsArraySetter) {
                 console.log('error with country object');
                 return
             }
+            actualCountryObject.optionsArraySetter(newOptionsArray);
             actualCountryObject.countriesMapSetter({countries: tempCountriesMap})
-            const newFirstArray = Array.from(tempCountriesMap.values());
-            actualCountryObject.setter(newFirstArray)
+            const firstArray = Array.from(tempCountriesMap.values());
+            actualCountryObject.setter(firstArray)
+            const firstPageArray = firstArray.slice(0, actualCountryObject.amountPerPage);
             const promises:Promise<string>[] = [];
-            newFirstArray.forEach((country) => {
+            firstPageArray.forEach((country) => {
                 if (country) {
                     promises.push(preloadImage(country.flags.png))
                 }
             })
             await Promise.all(promises)
+            console.log(promises);
             loadingHandler();
         }
     }
-    // remake into suspense and add only to the section
+
     useEffect(() => {
         if (isLoading) {
             loadCountries();
         }
-    })
+    }, [isLoading])
 
     return (
         <>
@@ -118,7 +117,7 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
                         <StyledWrapper>
                             <Header changeThemeHandler={changeThemeHandler}/>
                             <MainTag>
-                                <MainPage optionsArray={optionsArray}></MainPage>
+                                <Outlet></Outlet>
                             </MainTag>
                         </StyledWrapper>) :
                     "there's been a problem with API :("
