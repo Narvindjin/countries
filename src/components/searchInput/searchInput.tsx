@@ -10,6 +10,7 @@ const SearchInput = ({placeholder}: Props) => {
     const onChangeHandler = (evt:ChangeEvent<HTMLInputElement>) => {
         if (evt.currentTarget.value) {
             setFilled(true)
+            evt.currentTarget.form?.requestSubmit();
         } else {
             setFilled(false)
         }

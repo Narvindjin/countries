@@ -10,7 +10,7 @@ export const StyledContainer = styled.div`
     height: 100%;
     width: 100%;
     
-    @media (${media.mobile}) {
+    @media (${media.tablet}) {
         padding-left: 20px;
         padding-right: 20px;
     }

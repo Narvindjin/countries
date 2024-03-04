@@ -31,7 +31,7 @@ class theme implements ThemeTemplate {
         this.transDefault = TRANS_TIME +  " ease";
         this.colorWhite = "hsl(0, 0%, 100%)";
         this.theme = theme;
-        this.desktopMargin = '50px';
+        this.desktopMargin = '60px';
     }
 }
 

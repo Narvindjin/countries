@@ -1,5 +1,5 @@
 import React, {useState, useEffect, Dispatch, SetStateAction, useContext} from "react";
-import {StyledWrapper} from "./styles";
+import {StyledWrapper, Loader, LoaderContainer, LoaderInner, LoaderText} from "./styles";
 import Header from "../header/header";
 import MainTag from "../../components/mainTag/mainTag";
 import MainPage from "../../pages/main/mainPage";
@@ -20,7 +20,7 @@ interface regionInterface {
 
 const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
     const firstOption: regionInterface = {
-        value: null,
+        value: '',
         label: 'No Filter'
     }
     const actualCountryObject = useContext(CountryContext);
@@ -48,64 +48,70 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
         })
     }
 
-    useEffect(() => {
-        const loadCountries = async () => {
-            const newOptionsSet: Set<string> = new Set();
-            const responseObject: receivedCountry[] | null = await jsonFetchGet(FIRST_FETCH_URL);
-            const tempCountriesMap: countryMap = new Map();
-            if (responseObject === null) {
-                switchOkay(false);
-            } else {
-                responseObject.sort((a,b) => {
-                    if (a.name.common > b.name.common) {
-                        return 1
-                    } else {
-                        return -1
-                    }
-                })
-                responseObject.forEach((element: receivedCountry) => {
-                    tempCountriesMap.set(element.cca3, element);
-                    const region = element.region.toLowerCase();
-                    if (!newOptionsSet.has(region)) {
-                        newOptionsSet.add(region);
-                    }
-                });
-                const newOptionsArray:regionInterface[] = [];
-                newOptionsArray.push(firstOption);
-                for (const option of newOptionsSet.values()) {
-                    const regionObject:regionInterface = {
-                        value: option,
-                        label: option,
-                    }
-                    newOptionsArray.push(regionObject);
+    const loadCountries = async () => {
+        const newOptionsSet: Set<string> = new Set();
+        const responseObject: receivedCountry[] | null = await jsonFetchGet(FIRST_FETCH_URL);
+        const tempCountriesMap: countryMap = new Map();
+        if (responseObject === null) {
+            switchOkay(false);
+        } else {
+            responseObject.sort((a,b) => {
+                if (a.name.common > b.name.common) {
+                    return 1
+                } else {
+                    return -1
                 }
-                setOptionsArray(newOptionsArray);
-                if (!actualCountryObject.countriesMapSetter || !actualCountryObject.setter) {
-                    console.log('error with country object');
-                    return
+            })
+            responseObject.forEach((element: receivedCountry) => {
+                tempCountriesMap.set(element.cca3, element);
+                const region = element.region.toLowerCase();
+                if (!newOptionsSet.has(region)) {
+                    newOptionsSet.add(region);
                 }
-                actualCountryObject.countriesMapSetter({countries: tempCountriesMap})
-                const newFirstArray = Array.from(tempCountriesMap.values());
-                actualCountryObject.setter(newFirstArray)
-                const promises:Promise<string>[] = [];
-                newFirstArray.forEach((country) => {
-                    if (country) {
-                        promises.push(preloadImage(country.flags.png))
-                    }
-                })
-                await Promise.all(promises)
-                loadingHandler();
+            });
+            const newOptionsArray:regionInterface[] = [];
+            newOptionsArray.push(firstOption);
+            for (const option of newOptionsSet.values()) {
+                const regionObject:regionInterface = {
+                    value: option,
+                    label: option,
+                }
+                newOptionsArray.push(regionObject);
             }
+            setOptionsArray(newOptionsArray);
+            if (!actualCountryObject.countriesMapSetter || !actualCountryObject.setter) {
+                console.log('error with country object');
+                return
+            }
+            actualCountryObject.countriesMapSetter({countries: tempCountriesMap})
+            const newFirstArray = Array.from(tempCountriesMap.values());
+            actualCountryObject.setter(newFirstArray)
+            const promises:Promise<string>[] = [];
+            newFirstArray.forEach((country) => {
+                if (country) {
+                    promises.push(preloadImage(country.flags.png))
+                }
+            })
+            await Promise.all(promises)
+            loadingHandler();
         }
+    }
+    // remake into suspense and add only to the section
+    useEffect(() => {
         if (isLoading) {
             loadCountries();
         }
-    }, [])
+    })
 
     return (
         <>
             {isLoading ? (
-                'loading placeholder'
+                <LoaderContainer>
+                    <LoaderInner>
+                    <LoaderText>Loading...</LoaderText>
+                    <Loader></Loader>
+                    </LoaderInner>
+                </LoaderContainer>
             ) : (
                 isOkay ?
                     (

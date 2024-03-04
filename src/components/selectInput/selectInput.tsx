@@ -1,21 +1,29 @@
-import React, { useContext } from 'react'
-import Select from 'react-select'
-import { handleSelectStyles } from './styles';
+import React, { ChangeEvent, MutableRefObject } from 'react'
+import Select, { ActionMeta, SelectOptionActionMeta, SingleValue } from 'react-select'
+import { handleSelectStyles, FlexContainer } from './styles';
 import { regionInterface } from '../../blocks/wrapper/wrapper';
 import { useTheme } from 'styled-components';
 import {InvisibleLabel} from "../searchInput/styles";
 
 interface props {
     optionsArray: regionInterface[];
+    form: MutableRefObject<HTMLFormElement | null>;
 }
 
-const SelectInput = ({optionsArray}: props) => {
-    const currentTheme = useTheme()
+const SelectInput = ({optionsArray, form}: props) => {
+    const currentTheme = useTheme();
+    const onChangeHandler = (newValue: SingleValue<regionInterface>, actionMeta: ActionMeta<regionInterface>) => {
+        if (newValue && form.current) {
+            setTimeout(() => {
+                form.current?.requestSubmit();
+            }, 1)
+        }
+    }
     return (
-        <div>
+        <FlexContainer>
             <InvisibleLabel htmlFor={'region-filter'}>Filter by Region</InvisibleLabel>
-            <Select name={'region-filter'} id={'region-filter'} options={optionsArray} placeholder="Filter by Region" styles={handleSelectStyles(currentTheme)}></Select>
-        </div>
+            <Select isSearchable={false} onChange={onChangeHandler} name={'region-filter'} id={'region-filter'} options={optionsArray} placeholder="Filter by Region" styles={handleSelectStyles(currentTheme)}></Select>
+        </FlexContainer>
     )
 }
 

@@ -17,7 +17,7 @@ const SearchForm = ({optionsArray}:props) => {
     const filterRegions = (iterator:IterableIterator<receivedCountry>, value:string, arrayToFill: receivedCountry[]) => {
         if (value) {
             for (const valueObject of iterator) {
-                if (valueObject.region === value) {
+                if (valueObject.region.toLowerCase() === value.toLowerCase()) {
                     arrayToFill.push(valueObject);
                 }
             }
@@ -52,16 +52,18 @@ const SearchForm = ({optionsArray}:props) => {
         let newArrayToShow:receivedCountry[] = [];
         const regionValue = searchData.get('region-filter') as string | null;
         const searchValue = searchData.get('country-name') as string | null;
-        if (regionValue) {
+        if (regionValue && regionValue.length > 0) {
+            console.log(regionValue);
             filterRegions(countryMapValues, regionValue, newArrayToShow)
-            if (searchValue) {
+            if (searchValue && searchValue.length > 0) {
                 newArrayToShow = searchForCountry(newArrayToShow, searchValue);
             }
         } else {
-            if (searchValue) {
+            if (searchValue && searchValue.length > 0) {
                 newArrayToShow = searchForCountry(countryMapValues, searchValue);
             }
         }
+        console.log(newArrayToShow);
         if (countryObject.setter) {
             countryObject.setter(newArrayToShow);
         }
@@ -70,7 +72,7 @@ const SearchForm = ({optionsArray}:props) => {
     return (
         <StyledForm action={'#'} ref={formRef} method={'get'} onSubmit={handleFormSubmit}>
             <SearchInput placeholder='Search for a country'></SearchInput>
-            <SelectInput optionsArray={optionsArray}></SelectInput>
+            <SelectInput form={formRef} optionsArray={optionsArray}></SelectInput>
         </StyledForm>
     )
 }

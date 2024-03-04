@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { visuallyHidden, textNormal, shadowStandard } from "../../mixins";
+import media from "../../breakpoints";
 
 const StyledInput = styled.input<{ $filled: boolean }>`
     display: flex;
@@ -11,11 +12,16 @@ const StyledInput = styled.input<{ $filled: boolean }>`
     color: ${(props) => props.theme.colorText};
     border: none;
     border-radius: 5px;
-    min-width: 500px;
+    max-width: 100%;
+    width: 500px;
     min-height: 45px;
     align-items: center;
     ${textNormal};
     ${shadowStandard};
+
+    @media (${media.tablet}) {
+        width: 100%;
+    }
 
     &::placeholder {
         color: ${(props) => props.theme.colorInput};
@@ -29,6 +35,10 @@ const StyledInput = styled.input<{ $filled: boolean }>`
 
 const InputContainer = styled.div<{ $filled: boolean }>`
     position: relative;
+
+    @media (${media.tablet}) {
+        width: 100%;
+    }
 
     &::before {
         display: ${((props) => props.$filled ? 'none' : 'block')};

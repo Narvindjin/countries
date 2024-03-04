@@ -1,7 +1,6 @@
-import React, {MutableRefObject, useContext} from 'react';
+import React, {MutableRefObject} from 'react';
 import {StyledList, Divider} from "./styles";
 import CountryCard from "../countryCard/countryCard";
-import { CountryContext } from '../../contexts/contexts';
 import { receivedCountry } from '../../interfacesAPI/interfacesAPI';
 
 interface listInterFace {
@@ -10,7 +9,6 @@ interface listInterFace {
 }
 
 const CountriesList = ({loaderElement, countriesToShow}: React.PropsWithChildren<listInterFace>) => {
-    const countriesObject = useContext(CountryContext)
     return (
         <>
             <StyledList>

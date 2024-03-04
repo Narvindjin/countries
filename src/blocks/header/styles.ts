@@ -12,7 +12,7 @@ const StyledHeader = styled.header`
     z-index: 10;
     ${shadowStandard}
 
-    @media (${media.mobile}) {
+    @media (${media.tablet}) {
         position: fixed;
         top: 0;
         left: 0;
@@ -24,12 +24,20 @@ const HeaderContainer = styled.div`
     flex-direction: row;
     gap: ${(props) => props.theme.desktopMargin};
     justify-content: space-between;
+
+    @media (${media.mobile}) {
+        gap: 15px;
+    }
 `
 
 const HeaderLink = styled.a`
     display: block;
     font-size: 2.4rem;
     ${fontBold};
+
+    @media (${media.mobile}) {
+        font-size: 2rem;
+    }
 `
 
 export {StyledHeader, HeaderContainer, HeaderLink}
