@@ -24,7 +24,8 @@ html {
   font-family: ${(props) => props.theme.fontNunito};
   color: ${(props) => props.theme.colorText};
   scroll-behavior: smooth;
-
+  overflow: auto;
+  scrollbar-gutter: stable;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

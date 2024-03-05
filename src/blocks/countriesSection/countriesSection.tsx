@@ -3,7 +3,6 @@ import StyledContainer from "../../components/container/container";
 import CountriesList from "../../components/countriesList/countriesList";
 import { SectionContainer } from "./styles";
 import { receivedCountry } from "../../interfacesAPI/interfacesAPI";
-import { regionInterface } from '../wrapper/wrapper';
 import { CountryContext } from "../../contexts/contexts";
 import SearchForm from "../../components/searchForm/searchForm";
 

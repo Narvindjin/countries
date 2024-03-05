@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import {fontBold, fontLight, textNormal, shadowStandard, fontNormal} from "../../mixins";
+import {DetailsContainer} from "../detailLine/detail";
 
-const StyledCard = styled.a`
+const StyledCard = styled.article`
     display: flex;
     flex-direction: column;
     background-color: ${((props) => props.theme.colorElement)};
@@ -36,29 +37,8 @@ const CountryTitle = styled.h2 `
     font-size: 2.2rem;
 `
 
-const DetailsContainer = styled.dl`
-    display: flex;
-    flex-direction: row;
+const StyledDetailsContainer = styled(DetailsContainer)`
     ${textNormal};
-    margin: 0;
-    gap: 5px;
-
-    &:first-of-type {
-        margin-top: auto;
-    }
 `
 
-const DetailsTerm = styled.dt`
-    ${fontNormal};
-    
-    &:after {
-        content: ': ';
-    }
-`
-
-const DetailsDescription = styled.dd`
-    ${fontLight};
-    margin-left: 0;
-`
-
-export {StyledCard, CountryTitle, DetailsDescription, DetailsContainer, DetailsTerm, TextContainer, ImageContainer}
+export {StyledCard, CountryTitle, StyledDetailsContainer, TextContainer, ImageContainer}

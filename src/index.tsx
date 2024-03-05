@@ -3,18 +3,17 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css'
 import {
-    BrowserRouter,
     createBrowserRouter,
     createRoutesFromElements, Params,
     Route,
     RouterProvider,
-    Routes
 } from "react-router-dom";
 import ErrorBoundary from "./components/errors/errorBoundary";
 import NotFound from "./components/errors/notFound";
 import {receivedCountry} from "./interfacesAPI/interfacesAPI";
 import {jsonFetchGet} from "./components/jsonFetch/jsonFetch";
 import MainPage from "./pages/main/mainPage";
+import DetailPage from "./pages/detail/detailPage";
 
 const FIRST_FETCH_URL = 'https://restcountries.com/v3.1/all?fields=name,capital,region,nativeName,currencies,population,subregion,tld,languages,borders,flags,cca3'
 
@@ -43,10 +42,11 @@ const router = createBrowserRouter(
                 />
                 <Route
                     path="/:countryName"
+                    element={<DetailPage/>}
                     errorElement={<ErrorBoundary/>}
                 />
             </Route>
-            <Route path="*" element={<NotFound/>}/>
+            <Route path="*" element={<NotFound/>} errorElement={<ErrorBoundary/>}/>
         </Route>
     )
 );
