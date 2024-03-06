@@ -1,5 +1,10 @@
-import React from 'react';
-import {receivedCountry} from "../../interfacesAPI/interfacesAPI";
+import React, {useContext} from 'react';
+import {
+    currencyDictionary, currencyInterface,
+    languageDictionary, nativeNameInterfaceInner,
+    nativeNameInterfaceOuter,
+    receivedCountry,
+} from "../../interfacesAPI/interfacesAPI";
 import {
     StyledArticle,
     StyledDetailsContainer,
@@ -7,18 +12,73 @@ import {
     TextContainer,
     Title,
     ColumnContainer,
-    Column
+    Column, BorderContainer, BorderName, BorderList, BorderButton
 } from "./styles";
 import {DetailsTerm, DetailsDescription} from "../detailLine/detail";
+import {Link} from "react-router-dom";
+import {CountryContext} from "../../contexts/contexts";
 
 interface props {
     country: receivedCountry | null
 }
 
+type objectInterfaces = nativeNameInterfaceOuter | currencyDictionary | languageDictionary;
+
+type lowerObjectInterfaces = nativeNameInterfaceInner | currencyInterface | string;
+
+const isNativeName = (object: lowerObjectInterfaces): object is nativeNameInterfaceInner => {
+    return typeof object === "object" && "common" in object;
+}
+
+const isCurrency = (object: lowerObjectInterfaces): object is currencyInterface => {
+    return typeof object === "object" && "name" in object;
+}
+
 const CountryBlock = ({country}: props) => {
+    const actualCountryObject = useContext(CountryContext)
+
+    const constructString = (object: objectInterfaces) => {
+        let stringToReturn: string = '';
+        if (country) {
+            for (const localName in object) {
+                if (isNativeName(object[localName])) {
+                    const propertyObject = object[localName] as nativeNameInterfaceInner;
+                    if (stringToReturn === '') {
+                        stringToReturn = propertyObject.common;
+                    } else {
+                        stringToReturn = stringToReturn + ', ' + propertyObject.common;
+                    }
+                } else if (isCurrency(object[localName])) {
+                    const propertyObject = object[localName] as currencyInterface;
+                    if (stringToReturn === '') {
+                        stringToReturn = propertyObject.name;
+                    } else {
+                        stringToReturn = stringToReturn + ', ' + propertyObject.name;
+                    }
+                } else {
+                    const propertyString = object[localName] as string
+                    if (stringToReturn === '') {
+                        stringToReturn = propertyString;
+                    } else {
+                        stringToReturn = stringToReturn + ', ' + propertyString;
+                    }
+                }
+            }
+        }
+        return stringToReturn
+    }
+
+    const getBorderingCountryName = (key:string) => {
+        const countryObject = actualCountryObject.countriesMap.countries.get(key);
+        if (countryObject) {
+            return countryObject.name.common
+        } else {
+            return null
+        }
+    }
     return (
         <>
-            {country? (<StyledArticle>
+            {country ? (<StyledArticle>
                 <ImageContainer>
                     <img src={country.flags.png}
                          alt={country.flags.alt ? country.flags.alt : 'Flag of ' + country.name.official} width={300}
@@ -30,13 +90,7 @@ const CountryBlock = ({country}: props) => {
                         <Column>
                             <StyledDetailsContainer>
                                 <DetailsTerm>Native name</DetailsTerm>
-                                <DetailsDescription>{() => {
-                                let stringToReturn;
-                                for (const name in country.name.nativeName) {
-                                    stringToReturn = stringToReturn + name.common;
-                                }
-                                return stringToReturn
-                            }}</DetailsDescription>
+                                <DetailsDescription>{constructString(country.name.nativeName)}</DetailsDescription>
                             </StyledDetailsContainer>
                             <StyledDetailsContainer>
                                 <DetailsTerm>Population</DetailsTerm>
@@ -62,19 +116,36 @@ const CountryBlock = ({country}: props) => {
                             </StyledDetailsContainer>
                             <StyledDetailsContainer>
                             <DetailsTerm>Currencies</DetailsTerm>
-                            <DetailsDescription>{country.currencies}</DetailsDescription>
+                            <DetailsDescription>{constructString(country.currencies)}</DetailsDescription>
                         </StyledDetailsContainer>
                         <StyledDetailsContainer>
                             <DetailsTerm>Languages</DetailsTerm>
-                            <DetailsDescription>{country.languages}</DetailsDescription>
+                            <DetailsDescription>{constructString(country.languages)}</DetailsDescription>
                         </StyledDetailsContainer>
                         </Column>
                     </ColumnContainer>
+                    {country.borders.length > 0?
+                    <BorderContainer>
+                        <BorderName>Border Countries: </BorderName>
+                        <BorderList>
+                            {country.borders.map((borderingCountry) => {
+                                borderingCountry = borderingCountry.toLowerCase();
+                                return (
+                                    <li key={borderingCountry}>
+                                        <Link to={borderingCountry}>
+                                            {<BorderButton>{getBorderingCountryName(borderingCountry)}</BorderButton>}
+                                        </Link>
+                                    </li>
+                                )
+                            })}
+                        </BorderList>
+                    </BorderContainer>: null
+                    }
                 </TextContainer>
             </StyledArticle>) : 'no country :('
             }
-            </>
-            )
-            }
+        </>
+    )
+}
 
-            export default CountryBlock;
+export default CountryBlock;

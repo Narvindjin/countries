@@ -1,18 +1,13 @@
 import styled from "styled-components";
-import {textNormal, fontNormal, fontLight} from "../../mixins";
+import {fontNormal, fontLight} from "../../mixins";
 
 const DetailsContainer = styled.dl`
-    display: flex;
-    flex-direction: row;
+    display: inline;
     margin: 0;
-    gap: 5px;
-
-    &:first-of-type {
-        margin-top: auto;
-    }
 `
 
 const DetailsTerm = styled.dt`
+    display: inline;
     ${fontNormal};
     text-transform: capitalize;
     
@@ -22,6 +17,7 @@ const DetailsTerm = styled.dt`
 `
 
 const DetailsDescription = styled.dd`
+    display: inline;
     ${fontLight};
     margin-left: 0;
 `

@@ -45,10 +45,8 @@ const CountriesSection = () => {
             });
             if (loaderElement.current) {
                 const elementToWatch = loaderElement.current as Element
-                console.log('connected');
                 intersectionObserver.observe(elementToWatch);
                 return () => {
-                    console.log('disconnected');
                     intersectionObserver.disconnect();
                 }
             }

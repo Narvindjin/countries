@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import {textNormalDetail} from "../../mixins";
+import {ButtonLink} from "../../components/button/buttonLink";
 import media from "../../breakpoints";
+
+const BackButton = styled(ButtonLink)`
+
+`
 
 const BlockContainer = styled.section`
     display: flex;
@@ -11,4 +16,4 @@ const BlockContainer = styled.section`
     ${textNormalDetail};
 `
 
-export {BlockContainer}
+export {BlockContainer, BackButton}

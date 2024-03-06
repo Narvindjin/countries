@@ -3,8 +3,7 @@ import {Link, useLocation} from "react-router-dom";
 import {CountryContext} from "../../contexts/contexts";
 import {receivedCountry} from "../../interfacesAPI/interfacesAPI";
 import StyledContainer from "../../components/container/container";
-import {ButtonLink} from "../../components/button/buttonLink";
-import {BlockContainer} from "./styles";
+import {BackButton, BlockContainer} from "./styles";
 import CountryBlock from "../../components/countryBlock/countryBlock";
 
 const DetailBlock = () => {
@@ -27,7 +26,7 @@ const DetailBlock = () => {
                     <>
                     <div>
                         <Link to={'/'}>
-                            <ButtonLink>Back</ButtonLink>
+                            <BackButton>Back</BackButton>
                         </Link>
                     </div>
                     <CountryBlock country={currentCountry}></CountryBlock>

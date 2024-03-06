@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {fontBold, fontLight, textNormal, shadowStandard, fontNormal} from "../../mixins";
+import {fontBold, textNormal, shadowStandard} from "../../mixins";
 import {DetailsContainer} from "../detailLine/detail";
 
 const StyledCard = styled.article`
@@ -39,6 +39,10 @@ const CountryTitle = styled.h2 `
 
 const StyledDetailsContainer = styled(DetailsContainer)`
     ${textNormal};
+    
+    &:first-of-type {
+        margin-top: auto;
+    }
 `
 
 export {StyledCard, CountryTitle, StyledDetailsContainer, TextContainer, ImageContainer}

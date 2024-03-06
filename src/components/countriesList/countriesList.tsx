@@ -10,7 +10,6 @@ interface listInterFace {
 
 const CountriesList = ({loaderElement, countriesToShow}: React.PropsWithChildren<listInterFace>) => {
     return (
-        <>
             <StyledList>
                 {countriesToShow.map((country) => {
                         return (
@@ -22,7 +21,6 @@ const CountriesList = ({loaderElement, countriesToShow}: React.PropsWithChildren
                 }
                 <Divider ref={loaderElement}/>
             </StyledList>
-        </>
     )
 }
 

@@ -52,4 +52,4 @@ interface receivedCountry {
     tld: string[]
 }
 
-export type {receivedCountry, countryMap, mapObjectInterface}
+export type {receivedCountry, countryMap, mapObjectInterface, nativeNameInterfaceOuter, currencyDictionary, languageDictionary, nativeNameInterfaceInner, currencyInterface}

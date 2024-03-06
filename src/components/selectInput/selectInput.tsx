@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MutableRefObject } from 'react'
+import React, {ChangeEvent, MutableRefObject, useState} from 'react'
 import Select, { ActionMeta, SelectOptionActionMeta, SingleValue } from 'react-select'
 import { handleSelectStyles, FlexContainer } from './styles';
 import { regionInterface } from '../../blocks/wrapper/wrapper';
@@ -12,9 +12,11 @@ interface props {
 
 const SelectInput = ({optionsArray, form}: props) => {
     const currentTheme = useTheme();
+    const [currentOption, setCurrentOption] = useState<regionInterface | null>(null)
     const onChangeHandler = (newValue: SingleValue<regionInterface>, actionMeta: ActionMeta<regionInterface>) => {
         if (newValue && form.current) {
             setTimeout(() => {
+                setCurrentOption(newValue);
                 form.current?.requestSubmit();
             }, 1)
         }
@@ -22,7 +24,7 @@ const SelectInput = ({optionsArray, form}: props) => {
     return (
         <FlexContainer>
             <InvisibleLabel htmlFor={'region-filter'}>Filter by Region</InvisibleLabel>
-            <Select isSearchable={false} onChange={onChangeHandler} name={'region-filter'} id={'region-filter'} options={optionsArray} placeholder="Filter by Region" styles={handleSelectStyles(currentTheme)}></Select>
+            <Select isSearchable={false} value={currentOption} onChange={onChangeHandler} name={'region-filter'} id={'region-filter'} options={optionsArray} placeholder="Filter by Region" styles={handleSelectStyles(currentTheme)}></Select>
         </FlexContainer>
     )
 }

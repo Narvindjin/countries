@@ -15,7 +15,7 @@ const StyledArticle = styled.article`
 `
 
 const ImageContainer = styled.div`
-    width: 40%;
+    width: 35%;
     max-width: 100%;
     height: auto;
     
@@ -26,7 +26,7 @@ const ImageContainer = styled.div`
 `
 
 const TextContainer = styled.div`
-    width: 50%;
+    width: 60%;
     display: flex;
     flex-direction: column;
 `
@@ -34,7 +34,7 @@ const TextContainer = styled.div`
 const Title = styled.h1`
     font-size: 2.8rem;
     ${fontBold};
-    color: ${(props) => props.theme.colorElement};
+    color: ${(props) => props.theme.colorText};
     margin-top: 0;
     margin-bottom: 40px;
     
@@ -53,7 +53,7 @@ const ColumnContainer = styled.div`
 const Column = styled.div`
     display: flex;
     flex-direction: column;
-    max-width: 45%;
+    width: 48%;
     gap: 5px;
 `
 
@@ -61,4 +61,25 @@ const StyledDetailsContainer = styled(DetailsContainer)`
     ${textNormalDetail}
 `
 
-export {StyledArticle, StyledDetailsContainer, ImageContainer, TextContainer, Title, ColumnContainer, Column}
+const BorderContainer = styled.div`
+    display: block;
+`
+
+const BorderName = styled.span`
+    ${textNormalDetail};
+    ${fontBold};
+`
+
+const BorderList = styled.ul`
+    padding: 0;
+    margin: 0;
+    display: inline-flex;
+    gap: 5px;
+    list-style-type: none;
+`
+
+const BorderButton = styled.div`
+    
+`
+
+export {StyledArticle, StyledDetailsContainer, ImageContainer, TextContainer, Title, ColumnContainer, Column, BorderContainer, BorderName, BorderList, BorderButton}
