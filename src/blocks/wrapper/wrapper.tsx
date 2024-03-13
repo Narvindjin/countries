@@ -68,7 +68,10 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
                     newOptionsSet.add(region);
                 }
             });
-            const newOptionsArray: regionInterface[] = actualCountryObject.optionsArray;
+            const newOptionsArray: regionInterface[] = [{
+                label: 'No Filter',
+                value: '',
+            }];
             for (const option of newOptionsSet.values()) {
                 const regionObject: regionInterface = {
                     value: option,

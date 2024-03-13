@@ -18,10 +18,10 @@ function App() {
     const changeThemeHandler = () => {
         if (selectedTheme === lightTheme) {
             changeTheme(darkTheme)
-            document.cookie=themeCookie + "=dark; max-age=31536000; Secure"
+            document.cookie=cookieName + "=dark; max-age=31536000; Secure"
         } else {
             changeTheme(lightTheme);
-            document.cookie=themeCookie + "=light; max-age=31536000; Secure"
+            document.cookie=cookieName + "=light; max-age=31536000; Secure"
         }
     }
     return (

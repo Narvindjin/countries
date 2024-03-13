@@ -132,7 +132,7 @@ const CountryBlock = ({country}: props) => {
                                 borderingCountry = borderingCountry.toLowerCase();
                                 return (
                                     <li key={borderingCountry}>
-                                        <Link to={borderingCountry}>
+                                        <Link to={'/' + borderingCountry}>
                                             {<BorderButton>{getBorderingCountryName(borderingCountry)}</BorderButton>}
                                         </Link>
                                     </li>

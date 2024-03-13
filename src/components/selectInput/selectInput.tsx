@@ -1,4 +1,4 @@
-import React, {ChangeEvent, MutableRefObject, useState} from 'react'
+import React, {ChangeEvent, MutableRefObject, useEffect, useState} from 'react'
 import Select, { ActionMeta, SelectOptionActionMeta, SingleValue } from 'react-select'
 import { handleSelectStyles, FlexContainer } from './styles';
 import { regionInterface } from '../../blocks/wrapper/wrapper';
@@ -13,11 +13,15 @@ interface props {
 const SelectInput = ({optionsArray, form}: props) => {
     const currentTheme = useTheme();
     const [currentOption, setCurrentOption] = useState<regionInterface | null>(null)
+
+    useEffect(() => {
+        form.current?.requestSubmit()
+    }, [currentOption]);
+
     const onChangeHandler = (newValue: SingleValue<regionInterface>, actionMeta: ActionMeta<regionInterface>) => {
         if (newValue && form.current) {
             setTimeout(() => {
                 setCurrentOption(newValue);
-                form.current?.requestSubmit();
             }, 1)
         }
     }

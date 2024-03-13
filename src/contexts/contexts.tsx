@@ -21,10 +21,7 @@ const initialState = {
     amountPerPage: 20,
     countriesMap: {countries: countriesMap},
     countriesMapSetter: null,
-    optionsArray: [{
-        label: 'No Filter',
-        value: '',
-    },],
+    optionsArray: [],
     optionsArraySetter: null,
 }
 
