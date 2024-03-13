@@ -15,7 +15,9 @@ const SelectInput = ({optionsArray, form}: props) => {
     const [currentOption, setCurrentOption] = useState<regionInterface | null>(null)
 
     useEffect(() => {
-        form.current?.requestSubmit()
+        if (currentOption) {
+            form.current?.requestSubmit()
+        }
     }, [currentOption]);
 
     const onChangeHandler = (newValue: SingleValue<regionInterface>, actionMeta: ActionMeta<regionInterface>) => {

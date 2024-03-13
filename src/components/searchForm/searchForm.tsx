@@ -59,6 +59,8 @@ const SearchForm = () => {
         } else {
             if (searchValue && searchValue.length > 0) {
                 newArrayToShow = searchForCountry(countryMapValues, searchValue);
+            } else {
+                newArrayToShow = Array.from(countryMapValues);
             }
         }
         console.log(newArrayToShow);
