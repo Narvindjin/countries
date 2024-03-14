@@ -1,10 +1,17 @@
 import styled from "styled-components";
 import {textNormalDetail} from "../../mixins";
 import {ButtonLink} from "../../components/button/buttonLink";
+import {Link} from "react-router-dom";
 import media from "../../breakpoints";
 
-const BackButton = styled(ButtonLink)`
 
+const StyledLink = styled(Link)`
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+`
+const BackButton = styled(ButtonLink)`
+    width: 125px;
 `
 
 const BlockContainer = styled.section`
@@ -16,4 +23,4 @@ const BlockContainer = styled.section`
     ${textNormalDetail};
 `
 
-export {BlockContainer, BackButton}
+export {BlockContainer, BackButton, StyledLink}

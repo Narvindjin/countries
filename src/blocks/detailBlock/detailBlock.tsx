@@ -3,8 +3,10 @@ import {Link, useLocation} from "react-router-dom";
 import {CountryContext} from "../../contexts/contexts";
 import {receivedCountry} from "../../interfacesAPI/interfacesAPI";
 import StyledContainer from "../../components/container/container";
-import {BackButton, BlockContainer} from "./styles";
+import {BackButton, BlockContainer, StyledLink} from "./styles";
 import CountryBlock from "../../components/countryBlock/countryBlock";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 
 const DetailBlock = () => {
     const actualCountryObject = useContext(CountryContext);
@@ -25,9 +27,12 @@ const DetailBlock = () => {
                 currentCountry?
                     <>
                     <div>
-                        <Link to={'/'}>
-                            <BackButton>Back</BackButton>
-                        </Link>
+                        <StyledLink to={'/'}>
+                            <BackButton>
+                                <FontAwesomeIcon icon={faArrowLeft} />
+                                <span>Back</span>
+                            </BackButton>
+                        </StyledLink>
                     </div>
                     <CountryBlock country={currentCountry}></CountryBlock>
                     </>:
