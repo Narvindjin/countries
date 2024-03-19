@@ -12,6 +12,9 @@ const StyledLink = styled(Link)`
 `
 const BackButton = styled(ButtonLink)`
     width: 125px;
+    & span {
+        margin-left: 10px;
+    }
 `
 
 const BlockContainer = styled.section`

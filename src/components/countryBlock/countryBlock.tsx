@@ -12,7 +12,7 @@ import {
     TextContainer,
     Title,
     ColumnContainer,
-    Column, BorderContainer, BorderName, BorderList, BorderButton
+    Column, BorderContainer, BorderName, BorderButton
 } from "./styles";
 import {DetailsTerm, DetailsDescription} from "../detailLine/detail";
 import {Link} from "react-router-dom";
@@ -127,18 +127,16 @@ const CountryBlock = ({country}: props) => {
                     {country.borders.length > 0?
                     <BorderContainer>
                         <BorderName>Border Countries: </BorderName>
-                        <BorderList>
-                            {country.borders.map((borderingCountry) => {
-                                borderingCountry = borderingCountry.toLowerCase();
-                                return (
-                                    <li key={borderingCountry}>
-                                        <Link to={'/' + borderingCountry}>
-                                            {<BorderButton>{getBorderingCountryName(borderingCountry)}</BorderButton>}
-                                        </Link>
-                                    </li>
-                                )
-                            })}
-                        </BorderList>
+                        {country.borders.map((borderingCountry) => {
+                            borderingCountry = borderingCountry.toLowerCase();
+                            return (
+                                <div key={borderingCountry}>
+                                    <Link to={'/' + borderingCountry}>
+                                        {<BorderButton>{getBorderingCountryName(borderingCountry)}</BorderButton>}
+                                    </Link>
+                                </div>
+                            )
+                        })}
                     </BorderContainer>: null
                     }
                 </TextContainer>

@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {CountryContext} from "../../contexts/contexts";
 import {receivedCountry} from "../../interfacesAPI/interfacesAPI";
 import StyledContainer from "../../components/container/container";

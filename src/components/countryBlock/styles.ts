@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import {fontBold, textNormalDetail} from "../../mixins";
+import {fontBold, textNormalDetail, blockMargin} from "../../mixins";
 import media from "../../breakpoints";
+import {ButtonLink} from "../button/buttonLink";
 import {DetailsContainer} from "../detailLine/detail";
 
 const StyledArticle = styled.article`
@@ -12,6 +13,15 @@ const StyledArticle = styled.article`
     position: relative;
     align-items: center;
     justify-content: space-between;
+    ${blockMargin};
+    
+    @media (${media.tablet}) {
+        gap: 75px;
+    }
+    
+    @media (${media.mobile}) {
+        flex-direction: column;
+    }
 `
 
 const ImageContainer = styled.div`
@@ -23,12 +33,28 @@ const ImageContainer = styled.div`
         width: 100%;
         height: auto;
     }
+    
+    @media (${media.tablet}) {
+        width: 50%;
+    }
+    
+    @media (${media.mobile}) {
+        width: 100%;
+    }
 `
 
 const TextContainer = styled.div`
     width: 60%;
     display: flex;
     flex-direction: column;
+    
+    @media (${media.tablet}) {
+        width: 40%;
+    }
+    
+    @media (${media.mobile}) {
+        width: 100%;
+    }
 `
 
 const Title = styled.h1`
@@ -48,13 +74,23 @@ const ColumnContainer = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    gap: 15px;
+    
+    @media (${media.tablet}) {
+        flex-direction: column;
+        gap: 40px;
+    }
 `
 
 const Column = styled.div`
     display: flex;
     flex-direction: column;
     width: 48%;
-    gap: 5px;
+    gap: 12px;
+    
+    @media (${media.tablet}) {
+        width: 100%;
+    }
 `
 
 const StyledDetailsContainer = styled(DetailsContainer)`
@@ -62,24 +98,22 @@ const StyledDetailsContainer = styled(DetailsContainer)`
 `
 
 const BorderContainer = styled.div`
-    display: block;
+    display: inline-flex;
+    margin-top: 70px;
+    column-gap: 15px;
+    row-gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
 `
 
 const BorderName = styled.span`
     ${textNormalDetail};
     ${fontBold};
+    min-width: fit-content;
 `
 
-const BorderList = styled.ul`
-    padding: 0;
-    margin: 0;
-    display: inline-flex;
-    gap: 5px;
-    list-style-type: none;
+const BorderButton = styled(ButtonLink)`
+    width: fit-content;
 `
 
-const BorderButton = styled.div`
-    
-`
-
-export {StyledArticle, StyledDetailsContainer, ImageContainer, TextContainer, Title, ColumnContainer, Column, BorderContainer, BorderName, BorderList, BorderButton}
+export {StyledArticle, StyledDetailsContainer, ImageContainer, TextContainer, Title, ColumnContainer, Column, BorderContainer, BorderName, BorderButton}
