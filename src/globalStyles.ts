@@ -85,7 +85,7 @@ textarea {
 }
 
 input:-webkit-autofill {
-  box-shadow: inset 0 0 0 1000px ${(props) => props.theme.colorInput};
+  box-shadow: inset 0 0 0 1000px ${(props) => props.theme.colorElement};
 
   -webkit-text-fill-color: ${(props) => props.theme.colorText};
 }

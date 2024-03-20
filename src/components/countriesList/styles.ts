@@ -1,7 +1,17 @@
 import styled from "styled-components";
 import media from "../../breakpoints";
+import {transitionRules} from "../../mixins";
 
-const StyledList = styled.ul`
+const ListWrapper = styled.div`
+    position: relative;
+`
+
+interface ListInterface {
+    $isFirstLoad: boolean
+}
+
+const StyledList = styled.ul<ListInterface>`
+    position: relative;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     grid-auto-flow: row;
@@ -9,7 +19,10 @@ const StyledList = styled.ul`
     list-style-type: none;
     padding-left: 0;
     margin-top: 0;
+    translate: ${({$isFirstLoad}) => $isFirstLoad? '0 80px': 0};
+    opacity: ${({$isFirstLoad}) => $isFirstLoad? 0: 1};
     margin-bottom: ${(props) => props.theme.desktopMargin};
+    ${transitionRules};
 
     @media (${media.smallDesktop}) {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -35,4 +48,4 @@ const Divider = styled.li`
     width: 100%;
 `
 
-export {StyledList, Divider}
+export {ListWrapper, StyledList, Divider}

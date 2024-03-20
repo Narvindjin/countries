@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
     currencyDictionary, currencyInterface,
     languageDictionary, nativeNameInterfaceInner,
@@ -36,6 +36,13 @@ const isCurrency = (object: lowerObjectInterfaces): object is currencyInterface 
 
 const CountryBlock = ({country}: props) => {
     const actualCountryObject = useContext(CountryContext)
+    const [isFirstLoad, setIsFirstLoad] = useState(true)
+
+    useEffect(() => {
+        if (isFirstLoad) {
+            setIsFirstLoad(false)
+        }
+    }, []);
 
     const constructString = (object: objectInterfaces) => {
         let stringToReturn: string = '';
@@ -79,12 +86,12 @@ const CountryBlock = ({country}: props) => {
     return (
         <>
             {country ? (<StyledArticle>
-                <ImageContainer>
+                <ImageContainer $isFirstLoad={isFirstLoad}>
                     <img src={country.flags.png}
                          alt={country.flags.alt ? country.flags.alt : 'Flag of ' + country.name.official} width={300}
                          height={210}/>
                 </ImageContainer>
-                <TextContainer>
+                <TextContainer $isFirstLoad={isFirstLoad}>
                     <Title>{country.name.common}</Title>
                     <ColumnContainer>
                         <Column>

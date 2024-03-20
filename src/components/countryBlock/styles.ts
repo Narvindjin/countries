@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {fontBold, textNormalDetail, blockMargin} from "../../mixins";
+import {fontBold, textNormalDetail, blockMargin, transitionRules} from "../../mixins";
 import media from "../../breakpoints";
 import {ButtonLink} from "../button/buttonLink";
 import {DetailsContainer} from "../detailLine/detail";
@@ -24,10 +24,18 @@ const StyledArticle = styled.article`
     }
 `
 
-const ImageContainer = styled.div`
+interface outsideProps {
+    $isFirstLoad: boolean
+}
+
+const ImageContainer = styled.div<outsideProps>`
     width: 35%;
     max-width: 100%;
     height: auto;
+    translate: ${({$isFirstLoad}) => $isFirstLoad? '-40px 0': 0};
+    opacity: ${({$isFirstLoad}) => $isFirstLoad? 0: 1};
+    
+    ${transitionRules};
     
     & img {
         width: 100%;
@@ -40,13 +48,17 @@ const ImageContainer = styled.div`
     
     @media (${media.mobile}) {
         width: 100%;
+        translate: ${({$isFirstLoad}) => $isFirstLoad? '0 40px': 0};
     }
 `
 
-const TextContainer = styled.div`
+const TextContainer = styled.div<outsideProps>`
     width: 60%;
     display: flex;
     flex-direction: column;
+    translate: ${({$isFirstLoad}) => $isFirstLoad? '40px 0': 0};
+    opacity: ${({$isFirstLoad}) => $isFirstLoad? 0: 1};
+    ${transitionRules};
     
     @media (${media.tablet}) {
         width: 40%;
@@ -54,6 +66,7 @@ const TextContainer = styled.div`
     
     @media (${media.mobile}) {
         width: 100%;
+        translate: ${({$isFirstLoad}) => $isFirstLoad? '0 40px': 0};
     }
 `
 

@@ -1,5 +1,5 @@
-import React, {MutableRefObject} from 'react';
-import {StyledList, Divider} from "./styles";
+import React, {MutableRefObject, useEffect, useState} from 'react';
+import {ListWrapper, StyledList, Divider} from "./styles";
 import CountryCard from "../countryCard/countryCard";
 import { receivedCountry } from '../../interfacesAPI/interfacesAPI';
 
@@ -9,8 +9,17 @@ interface listInterFace {
 }
 
 const CountriesList = ({loaderElement, countriesToShow}: React.PropsWithChildren<listInterFace>) => {
+    const [isFirstLoad, setIsFirstLoad] = useState(true);
+
+    useEffect(() => {
+        if (isFirstLoad) {
+            setIsFirstLoad(false);
+        }
+    },[]);
+
     return (
-            <StyledList>
+        <ListWrapper>
+            <StyledList $isFirstLoad={isFirstLoad}>
                 {countriesToShow.map((country) => {
                         return (
                             <li key={country.cca3}>
@@ -21,6 +30,7 @@ const CountriesList = ({loaderElement, countriesToShow}: React.PropsWithChildren
                 }
                 <Divider ref={loaderElement}/>
             </StyledList>
+        </ListWrapper>
     )
 }
 

@@ -47,6 +47,10 @@ const hoverFadeOut = css`
     }
 `
 
+const transitionRules = css`
+    transition: opacity 0.4s ease, translate 0.4s ease;
+`
+
 const visuallyHidden = css`
     position: absolute;
       width: 1px;
@@ -63,4 +67,4 @@ const visuallyHidden = css`
       clip-path: inset(100%);
 `
 
-export {fontNormal, fontLight, textNormal, textNormalDetail, fontBold, blockMargin, hoverFadeOut, visuallyHidden, shadowStandard, shadowStandardValue}
+export {fontNormal, fontLight, textNormal, transitionRules, textNormalDetail, fontBold, blockMargin, hoverFadeOut, visuallyHidden, shadowStandard, shadowStandardValue}
