@@ -42,7 +42,7 @@ const CountryBlock = ({country}: props) => {
         if (isFirstLoad) {
             setIsFirstLoad(false)
         }
-    }, []);
+    }, [isFirstLoad]);
 
     const constructString = (object: objectInterfaces) => {
         let stringToReturn: string = '';

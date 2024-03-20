@@ -15,7 +15,7 @@ const CountriesList = ({loaderElement, countriesToShow}: React.PropsWithChildren
         if (isFirstLoad) {
             setIsFirstLoad(false);
         }
-    },[]);
+    },[isFirstLoad]);
 
     return (
         <ListWrapper>

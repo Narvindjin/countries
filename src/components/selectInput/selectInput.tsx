@@ -1,5 +1,5 @@
-import React, {ChangeEvent, MutableRefObject, useEffect, useState} from 'react'
-import Select, { ActionMeta, SelectOptionActionMeta, SingleValue } from 'react-select'
+import React, {MutableRefObject, useEffect, useState} from 'react'
+import Select, { ActionMeta, SingleValue } from 'react-select'
 import { handleSelectStyles, FlexContainer } from './styles';
 import { regionInterface } from '../../blocks/wrapper/wrapper';
 import { useTheme } from 'styled-components';
@@ -18,7 +18,7 @@ const SelectInput = ({optionsArray, form}: props) => {
         if (currentOption) {
             form.current?.requestSubmit()
         }
-    }, [currentOption]);
+    }, [currentOption, form]);
 
     const onChangeHandler = (newValue: SingleValue<regionInterface>, actionMeta: ActionMeta<regionInterface>) => {
         if (newValue && form.current) {

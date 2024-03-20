@@ -4,7 +4,7 @@ const ErrorBoundary = () => {
     const error = useRouteError();
     useEffect(() => {
         console.log(error);
-    }, []);
+    }, [error]);
     return(
         <div>
             Ошибка

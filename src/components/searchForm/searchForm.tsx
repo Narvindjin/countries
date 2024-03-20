@@ -2,7 +2,6 @@ import React, {FormEvent, MutableRefObject, useContext, useRef} from "react";
 import {StyledForm} from "./styles";
 import SearchInput from "../searchInput/searchInput";
 import SelectInput from "../selectInput/selectInput";
-import {regionInterface} from "../../blocks/wrapper/wrapper";
 import {CountryContext} from "../../contexts/contexts";
 import { receivedCountry } from "../../interfacesAPI/interfacesAPI";
 

@@ -103,7 +103,7 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
         if (isLoading) {
             loadCountries();
         }
-    }, [isLoading])
+    }, [isLoading, loadCountries])
 
     return (
         <>

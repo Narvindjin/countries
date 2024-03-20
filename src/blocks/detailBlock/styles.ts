@@ -2,7 +2,6 @@ import styled from "styled-components";
 import {textNormalDetail} from "../../mixins";
 import {ButtonLink} from "../../components/button/buttonLink";
 import {Link} from "react-router-dom";
-import media from "../../breakpoints";
 
 
 const StyledLink = styled(Link)`
