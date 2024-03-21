@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import media from "../../breakpoints";
-import {fontBold, shadowStandard} from "../../mixins";
+import {fontBold, shadowStandard, hoverFadeOut} from "../../mixins";
 
 const StyledHeader = styled.header`
     display: flex;
@@ -34,6 +34,7 @@ const HeaderLink = styled.a`
     display: block;
     font-size: 2.4rem;
     ${fontBold};
+    ${hoverFadeOut};
 
     @media (${media.mobile}) {
         font-size: 2rem;

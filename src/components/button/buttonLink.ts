@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {fontLight} from "../../mixins";
-import {shadowStandard} from "../../mixins";
+import {shadowAndOpacity} from "../../mixins";
 
 const ButtonLink = styled.div`
     display: flex;
@@ -12,7 +12,7 @@ const ButtonLink = styled.div`
     min-width: 100px;
     position: relative;
     ${fontLight};
-    ${shadowStandard}
+    ${shadowAndOpacity}
 `
 
 export {ButtonLink}

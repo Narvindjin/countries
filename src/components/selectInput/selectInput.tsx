@@ -4,6 +4,7 @@ import { handleSelectStyles, FlexContainer } from './styles';
 import { regionInterface } from '../../blocks/wrapper/wrapper';
 import { useTheme } from 'styled-components';
 import {InvisibleLabel} from "../searchInput/styles";
+import {theme} from "../../theme";
 
 interface props {
     optionsArray: regionInterface[];
@@ -30,7 +31,7 @@ const SelectInput = ({optionsArray, form}: props) => {
     return (
         <FlexContainer>
             <InvisibleLabel htmlFor={'region-filter'}>Filter by Region</InvisibleLabel>
-            <Select isSearchable={false} value={currentOption} onChange={onChangeHandler} name={'region-filter'} id={'region-filter'} options={optionsArray} placeholder="Filter by Region" styles={handleSelectStyles(currentTheme)}></Select>
+            <Select isSearchable={false} value={currentOption} onChange={onChangeHandler} name={'region-filter'} id={'region-filter'} options={optionsArray} placeholder="Filter by Region" styles={handleSelectStyles(currentTheme as theme)}></Select>
         </FlexContainer>
     )
 }

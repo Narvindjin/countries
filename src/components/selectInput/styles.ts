@@ -21,7 +21,8 @@ const handleSelectStyles = (theme:theme) => {
           paddingLeft: '10px',
           fontSize: '1.4rem',
           transition: '',
-          minHeight: '45px'
+          minHeight: '45px',
+            cursor: 'pointer',
         }),
         indicatorSeparator: (baseStyles, state) => ({
           ...baseStyles,
@@ -41,7 +42,8 @@ const handleSelectStyles = (theme:theme) => {
           color: state.isFocused?'orange':theme.colorText,
           padding: '5px 15px 5px 15px',
           backgroundColor: 'transparent',
-          textTransform: 'capitalize',  
+          textTransform: 'capitalize',
+            cursor: 'pointer'
         }),
         input: (base, state) => ({
           ...base,

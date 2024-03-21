@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {fontBold, textNormal, shadowStandard} from "../../mixins";
+import {fontBold, textNormal, shadowAndScale} from "../../mixins";
 import {DetailsContainer} from "../detailLine/detail";
 
 const StyledCard = styled.article`
@@ -7,7 +7,7 @@ const StyledCard = styled.article`
     flex-direction: column;
     background-color: ${((props) => props.theme.colorElement)};
     height: 100%;
-    ${shadowStandard}
+    ${shadowAndScale};
 `
 
 const ImageContainer = styled.div`

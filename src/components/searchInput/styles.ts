@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { visuallyHidden, textNormal, shadowStandard } from "../../mixins";
+import { visuallyHidden, textNormal, shadowStandard, hoverShadow } from "../../mixins";
 import media from "../../breakpoints";
 
 const StyledInput = styled.input<{ $filled: boolean }>`
@@ -17,7 +17,7 @@ const StyledInput = styled.input<{ $filled: boolean }>`
     min-height: 45px;
     align-items: center;
     ${textNormal};
-    ${shadowStandard};
+    ${hoverShadow};
 
     @media (${media.tablet}) {
         width: 100%;
