@@ -120,4 +120,4 @@ const visuallyHidden = css`
       clip-path: inset(100%);
 `
 
-export {fontNormal, fontLight, textNormal, transitionRules, shadowAndOpacity, textNormalDetail, fontBold, blockMargin, hoverShadow, shadowAndScale, hoverFadeOut, visuallyHidden, shadowStandardValue}
+export {fontNormal, fontLight, textNormal, transitionRules, shadowAndOpacity, textNormalDetail, fontBold, blockMargin, hoverShadow, shadowAndScale, hoverFadeOut, visuallyHidden, shadowStandard, shadowStandardValue}
