@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext, useCallback, useRef} from "react";
+import React, {useState, useEffect, useContext, useRef} from "react";
 import {StyledWrapper} from "./styles";
 import Header from "../header/header";
 import MainTag from "../../components/mainTag/mainTag";
