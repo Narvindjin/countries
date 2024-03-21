@@ -50,7 +50,6 @@ const SearchForm = () => {
         const regionValue = searchData.get('region-filter') as string | null;
         const searchValue = searchData.get('country-name') as string | null;
         if (regionValue && regionValue.length > 0) {
-            console.log(regionValue);
             filterRegions(countryMapValues, regionValue, newArrayToShow)
             if (searchValue && searchValue.length > 0) {
                 newArrayToShow = searchForCountry(newArrayToShow, searchValue);
@@ -62,7 +61,6 @@ const SearchForm = () => {
                 newArrayToShow = Array.from(countryMapValues);
             }
         }
-        console.log(newArrayToShow);
         if (countryObject.setter) {
             countryObject.setter(newArrayToShow);
         }

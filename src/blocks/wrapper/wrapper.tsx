@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext, useCallback} from "react";
+import React, {useState, useEffect, useContext, useCallback, useRef} from "react";
 import {StyledWrapper} from "./styles";
 import Header from "../header/header";
 import MainTag from "../../components/mainTag/mainTag";
@@ -40,70 +40,72 @@ const Wrapper = ({changeThemeHandler}: React.PropsWithChildren<props>) => {
         })
     }
 
-    const loadCountries = useCallback(async () => {
-            const loadingHandler = () => {
-                if (isLoading) {
-                    switchLoadingStatus(false)
-                }
+    const loadCountries = async () => {
+        const loadingHandler = () => {
+            if (isLoading) {
+                switchLoadingStatus(false)
             }
-            const newOptionsSet: Set<string> = new Set();
-            const tempCountriesMap: countryMap = new Map();
-            const responseObject = loaderData.apiData;
-            if (responseObject === null) {
-                switchOkay(false);
-            } else {
-                responseObject.sort((a, b) => {
-                    if (a.name.common > b.name.common) {
-                        return 1
-                    } else {
-                        return -1
-                    }
-                })
-                responseObject.forEach((element: receivedCountry) => {
-                    element.cca3 = element.cca3.toLowerCase();
-                    tempCountriesMap.set(element.cca3, element);
-                    const region = element.region.toLowerCase();
-                    if (!newOptionsSet.has(region)) {
-                        newOptionsSet.add(region);
-                    }
-                });
-                const newOptionsArray: regionInterface[] = [{
-                    label: 'No Filter',
-                    value: '',
-                }];
-                for (const option of newOptionsSet.values()) {
-                    const regionObject: regionInterface = {
-                        value: option,
-                        label: option,
-                    }
-                    newOptionsArray.push(regionObject);
+        }
+        const newOptionsSet: Set<string> = new Set();
+        const tempCountriesMap: countryMap = new Map();
+        const responseObject = loaderData.apiData;
+        if (responseObject === null) {
+            switchOkay(false);
+        } else {
+            responseObject.sort((a, b) => {
+                if (a.name.common > b.name.common) {
+                    return 1
+                } else {
+                    return -1
                 }
-                if (!actualCountryObject.countriesMapSetter || !actualCountryObject.setter || !actualCountryObject.optionsArraySetter) {
-                    console.log('error with country object');
-                    return
+            })
+            responseObject.forEach((element: receivedCountry) => {
+                element.cca3 = element.cca3.toLowerCase();
+                tempCountriesMap.set(element.cca3, element);
+                const region = element.region.toLowerCase();
+                if (!newOptionsSet.has(region)) {
+                    newOptionsSet.add(region);
                 }
-                actualCountryObject.optionsArraySetter(newOptionsArray);
-                actualCountryObject.countriesMapSetter({countries: tempCountriesMap})
-                const firstArray = Array.from(tempCountriesMap.values());
-                actualCountryObject.setter(firstArray)
-                const firstPageArray = firstArray.slice(0, actualCountryObject.amountPerPage);
-                const promises: Promise<string>[] = [];
-                firstPageArray.forEach((country) => {
-                    if (country) {
-                        promises.push(preloadImage(country.flags.png))
-                    }
-                })
-                await Promise.all(promises)
-                loadingHandler();
+            });
+            const newOptionsArray: regionInterface[] = [{
+                label: 'No Filter',
+                value: '',
+            }];
+            for (const option of newOptionsSet.values()) {
+                const regionObject: regionInterface = {
+                    value: option,
+                    label: option,
+                }
+                newOptionsArray.push(regionObject);
             }
-        }, [actualCountryObject, loaderData.apiData, isLoading]
-    )
+            if (!actualCountryObject.countriesMapSetter || !actualCountryObject.setter || !actualCountryObject.optionsArraySetter) {
+                console.log('error with country object');
+                return
+            }
+            actualCountryObject.optionsArraySetter(newOptionsArray);
+            actualCountryObject.countriesMapSetter({countries: tempCountriesMap})
+            const firstArray = Array.from(tempCountriesMap.values());
+            actualCountryObject.setter(firstArray)
+            const firstPageArray = firstArray.slice(0, actualCountryObject.amountPerPage);
+            const promises: Promise<string>[] = [];
+            firstPageArray.forEach((country) => {
+                if (country) {
+                    promises.push(preloadImage(country.flags.png))
+                }
+            })
+            await Promise.all(promises)
+            loadingHandler();
+        }
+    }
+
+    const loadCountriesWrapper = useRef(loadCountries)
 
     useEffect(() => {
         if (isLoading) {
-            loadCountries();
+            loadCountriesWrapper.current();
         }
-    }, [isLoading, loadCountries])
+
+    }, [isLoading, loadCountriesWrapper])
 
     return (
         <>

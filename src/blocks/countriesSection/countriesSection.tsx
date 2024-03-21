@@ -23,7 +23,6 @@ const CountriesSection = () => {
     }, [contextCountryArray, arrayContextObject.amountPerPage])
 
     useEffect(() => {
-        console.log(contextCountryArray)
         numberOfItems.current = arrayContextObject.amountPerPage;
         changeCountriesArray(contextCountryArray.slice(0, arrayContextObject.amountPerPage))
     }, [contextCountryArray, arrayContextObject.amountPerPage]);

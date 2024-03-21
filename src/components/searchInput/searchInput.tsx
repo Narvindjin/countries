@@ -9,14 +9,9 @@ const SearchInput = ({placeholder}: Props) => {
     const [filled, setFilled] = useState(false)
     const [currentQuery, setCurrentQuery] = useState('');
     const onChangeHandler = (evt:ChangeEvent<HTMLInputElement>) => {
-        if (evt.currentTarget.value) {
             setFilled(true)
             setCurrentQuery(evt.currentTarget.value)
             evt.currentTarget.form?.requestSubmit();
-        } else {
-            setFilled(false)
-            setCurrentQuery('');
-        }
     }
 
     return (
