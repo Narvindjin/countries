@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { visuallyHidden, textNormal, shadowStandard, hoverShadow } from "../../mixins";
+import { visuallyHidden, textNormal, hoverShadow } from "../../mixins";
 import media from "../../breakpoints";
 
 const StyledInput = styled.input<{ $filled: boolean }>`
