@@ -53,32 +53,12 @@ const hoverShadow = css`
 
     @media (hover: hover) {
         &:hover {
-            box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
         }
     };
 
     &:focus-visible {
-        box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
-    }
-`
-
-const shadowAndScale = css`
-    transition: transform ${TRANS_TIME} ease, box-shadow ${TRANS_TIME} ease;
-    ${shadowStandard};
-    transform: scale(1);
-    backface-visibility: hidden;
-    will-change: transform;  
-    
-    @media (hover: hover) {
-        &:hover {
-            box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
-            transform: scale(1.05) translate3d( 0, 0, 0);
-        }
-    };
-
-    &:focus-visible {
-        box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
-        transform: scale(1.05) translate3d( 0, 0, 0);
+        box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.2);
     }
 `
 
@@ -120,4 +100,4 @@ const visuallyHidden = css`
       clip-path: inset(100%);
 `
 
-export {fontNormal, fontLight, textNormal, transitionRules, shadowAndOpacity, textNormalDetail, fontBold, blockMargin, hoverShadow, shadowAndScale, hoverFadeOut, visuallyHidden, shadowStandard, shadowStandardValue}
+export {fontNormal, fontLight, textNormal, transitionRules, shadowAndOpacity, textNormalDetail, fontBold, blockMargin, hoverShadow, hoverFadeOut, visuallyHidden, shadowStandard, shadowStandardValue}
