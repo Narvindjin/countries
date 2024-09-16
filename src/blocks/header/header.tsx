@@ -12,7 +12,7 @@ function Header({changeThemeHandler}:React.PropsWithChildren<headerProps>) {
         <StyledHeader>
             <StyledContainer>
                 <HeaderContainer>
-                    <HeaderLink href={'/'}>Where in the world?</HeaderLink>
+                    <HeaderLink href={'/countries'}>Where in the world?</HeaderLink>
                     <ModeSwitcher changeHandler={changeThemeHandler}></ModeSwitcher>
                 </HeaderContainer>
             </StyledContainer>
