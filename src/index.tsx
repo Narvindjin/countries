@@ -48,7 +48,9 @@ const router = createBrowserRouter(
             </Route>
             <Route path="*" element={<NotFound/>} errorElement={<ErrorBoundary/>}/>
         </Route>
-    )
+    ), {
+        basename: '/countries'
+    }
 );
 
 root.render(
