@@ -1,13 +1,32 @@
-Это - учебный проект, созданный в рамках задачи [REST Countries API with color theme switcher challenge](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca) с [FrontendMentor](https://www.frontendmentor.io/).
+# Welcome to React Router!
 
-Ссылка на GitHub Pages - https://narvindjin.github.io/countries/
+A minimal template for experimenting with React Router v7.
 
-Сделан с помощью React, стилизация через styled-components.
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/minimal)
 
-Список требований:
-- Возможность просмотреть все страны, полученные с API, на домашней странице;
-- Поиск страны через поле ввода;
-- Фильтр стран по региону;
-- У каждой страны - отдельная страница с информацией;
-- На странице страны ссылки на страны, с которыми граничит;
-- Светлый и тёмный режим отображения;
+> ![NOTE]
+> This template should not be used for production apps and is intended more for experimentation and demo applications. Please see the [default](https://github.com/remix-run/react-router-templates/tree/main/default) template for a more full-featured template.
+
+## Getting Started
+
+### Installation
+
+Install the dependencies:
+
+```bash
+npm install
+```
+
+### Development
+
+Start the development server with HMR:
+
+```bash
+npm run dev
+```
+
+Your application will be available at `http://localhost:5173`.
+
+---
+
+Built with ❤️ using React Router.
