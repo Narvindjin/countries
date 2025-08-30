@@ -3,11 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://narvindjin.github.io/countries",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@fortawesome/free-regular-svg-icons": "^7.0.0",
@@ -15,6 +18,7 @@
     "@fortawesome/react-fontawesome": "^3.0.1",
     "@react-router/node": "^7.7.1",
     "@react-router/serve": "^7.7.1",
+    "gh-pages": "^6.3.0",
     "isbot": "^5.1.27",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

@@ -57,9 +57,11 @@ const router = createBrowserRouter([
       }
     ]
   },
-]);
+], {
+  basename: '/countries'
+});
 
 createRoot(root!).render(
-  <RouterProvider  router={router}>
+  <RouterProvider router={router}>
   </RouterProvider>
 );
