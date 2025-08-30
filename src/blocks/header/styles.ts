@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import media from "../../breakpoints";
 import {fontBold, shadowStandard, hoverFadeOut} from "../../mixins";
+import { Link } from "react-router";
 
 const StyledHeader = styled.header`
     display: flex;
@@ -30,7 +31,7 @@ const HeaderContainer = styled.div`
     }
 `
 
-const HeaderLink = styled.a`
+const HeaderLink = styled(Link)`
     display: block;
     font-size: 2.4rem;
     ${fontBold};

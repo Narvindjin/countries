@@ -1,7 +1,3 @@
-import type { Route } from "./+types/main-page";
-import { Outlet, type Params } from "react-router";
-import type {receivedCountry} from "../interfacesAPI/interfacesAPI";
-import {jsonFetchGet} from "../components/jsonFetch/jsonFetch";
 import React, { useState } from 'react';
 import Wrapper from "../blocks/wrapper/wrapper";
 import { lightTheme, darkTheme } from "../theme";
@@ -9,22 +5,7 @@ import GlobalStyle from "../globalStyles";
 import { ThemeProvider } from "styled-components";
 import {CountryContextContainer} from "../contexts/contexts";
 
-export interface LoaderInterface {
-    params: Params,
-    apiData: receivedCountry[] | null,
-}
-
-const FIRST_FETCH_URL = 'https://restcountries.com/v3.1/all?fields=name,capital,region,nativeName,currencies,population,languages,borders,flags,cca3'
-
-export async function clientLoader({
-  params,
-}: Route.ClientLoaderArgs) {
-  const apiData: receivedCountry[] | null = await jsonFetchGet(FIRST_FETCH_URL);
-  const returnObject: LoaderInterface = { params, apiData }
-  return returnObject
-}
-
-export default function Home({ loaderData }: Route.ComponentProps) {
+export default function Home() {
   const cookieName = 'theme-cookie'
     const themeCookie = document.cookie.split("; ")
   .find((row) => row.startsWith(cookieName))

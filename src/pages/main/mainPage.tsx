@@ -1,20 +1,20 @@
 import React from 'react';
+import CountriesSection from "../../blocks/countriesSection/countriesSection";
 import type {OutletInterface} from '../../blocks/wrapper/wrapper';
 import { useOutletContext } from 'react-router';
 import Loader from "../../components/loader/loader";
-import DetailBlock from "../../blocks/detailBlock/detailBlock";
 
 
-const DetailPage = () => {
+const MainPage = () => {
     const outletContext = useOutletContext<OutletInterface>()
     return (
         <>
         {outletContext.isLoading?
-            <Loader/>:
-            <DetailBlock/>
+            <></>:
+            <CountriesSection/>
         }
         </>
     )
 }
 
-export default DetailPage
+export default MainPage

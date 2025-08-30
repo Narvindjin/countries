@@ -5,7 +5,7 @@ import MainTag from "../../components/mainTag/mainTag";
 import {receivedCountry, countryMap} from "../../interfacesAPI/interfacesAPI";
 import {CountryContext} from "../../contexts/contexts";
 import {Outlet, useLoaderData} from "react-router";
-import type { LoaderInterface } from "~/routes/main-page";
+import type { LoaderInterface } from "~/main";
 
 interface props {
     changeThemeHandler: () => void;
